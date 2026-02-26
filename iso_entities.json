@@ -1,0 +1,5112 @@
+{
+    "AFG": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Velayat",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Wuleswali",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "AGO": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Província",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municpality|City Council",
+            "ent_type_local": "Município",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "City"
+        }
+    ],
+    "AIA": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Island",
+            "ent_type_local": "Island",
+            "entity_type": "Region"
+        }
+    ],
+    "ALA": [
+        {
+            "ent_type_eng": "Sub-Region",
+            "ent_type_local": "Sub-Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "ALB": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Qark",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "City"
+        }
+    ],
+    "AND": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parròquia",
+            "entity_type": "Region"
+        }
+    ],
+    "ARE": [
+        {
+            "ent_type_eng": "Emirate",
+            "ent_type_local": "Emirate",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipal Region",
+            "ent_type_local": "Municipal Region",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Township",
+            "ent_type_local": "Township",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Village",
+            "ent_type_local": "Village",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Sector",
+            "ent_type_local": "Sector",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "City"
+        }
+    ],
+    "ARG": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous City",
+            "ent_type_local": "Ciudad Autónoma",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Part",
+            "ent_type_local": "Partido",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Departamento",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Comuna",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commission",
+            "ent_type_local": "Comision",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Comuna",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Junta",
+            "ent_type_local": "Junta",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Junta",
+            "ent_type_local": "Junta De Gobierno",
+            "entity_type": "City"
+        }
+    ],
+    "ARM": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Marz",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Kaghak",
+            "entity_type": "Region"
+        }
+    ],
+    "ASM": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "County",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Village",
+            "ent_type_local": "Village",
+            "entity_type": "City"
+        }
+    ],
+    "ATF": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        }
+    ],
+    "ATG": [
+        {
+            "ent_type_eng": "Dependency",
+            "ent_type_local": "Dependency",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        }
+    ],
+    "AUS": [
+        {
+            "ent_type_eng": "Territory",
+            "ent_type_local": "Territory",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "State",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Area",
+            "ent_type_local": "Area",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Shire",
+            "ent_type_local": "Shire",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Unincorporated Area",
+            "ent_type_local": "Unincorporated AreaUnincorporate",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Town",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Unincorporated Area",
+            "ent_type_local": "Unincorporated Area",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District Council",
+            "ent_type_local": "District Council",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Aboriginal Council",
+            "ent_type_local": "Aboriginal Council",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Regional Council",
+            "ent_type_local": "Regional Council",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Rural City",
+            "ent_type_local": "Rural City",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "State reserve",
+            "ent_type_local": "State reserve",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Borough",
+            "ent_type_local": "Borough",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Islands",
+            "ent_type_local": "Islands",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "AUT": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Bundesländ",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": NaN,
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Statutory City",
+            "ent_type_local": "Statutarstadt",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Berzirk",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Gemeinde",
+            "entity_type": "City"
+        }
+    ],
+    "AZE": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "İqtisadi Rayonu",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Rayon",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Sahar",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "BDI": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "BEL": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Gewest",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Région",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincie",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Provincie",
+            "ent_type_local": "Province",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Arrondissement",
+            "ent_type_local": "Arrondissement",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Gemeente",
+            "entity_type": "City"
+        }
+    ],
+    "BEN": [
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Département",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Borough",
+            "ent_type_local": "Arrondissement",
+            "entity_type": "City"
+        }
+    ],
+    "BES": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Caribisch openbaar lichaam",
+            "entity_type": "Region"
+        }
+    ],
+    "BFA": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Région",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Département",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "BGD": [
+        {
+            "ent_type_eng": "Division",
+            "ent_type_local": "Bibhag",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Distict",
+            "ent_type_local": "Zila",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "BGR": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Oblast",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Obshtina",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "BHR": [
+        {
+            "ent_type_eng": "Governorate",
+            "ent_type_local": "Muhafazah",
+            "entity_type": "Region"
+        }
+    ],
+    "BHS": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        }
+    ],
+    "BIH": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Distrikt",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Entity",
+            "ent_type_local": "Entity",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Canton",
+            "ent_type_local": "Županija",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Opčine",
+            "entity_type": "City"
+        }
+    ],
+    "BLM": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Paroisse",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Quarter",
+            "ent_type_local": "Quartier",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "BLR": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Область",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City of Minsk",
+            "ent_type_local": "Горaд Мінск",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Раён",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Горад",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Rural Council",
+            "ent_type_local": "Сельскі Савет",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Гарадскі пасёлак",
+            "entity_type": "City"
+        }
+    ],
+    "BLZ": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        }
+    ],
+    "BMU": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "Region"
+        }
+    ],
+    "BOL": [
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Departamento",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Distrito",
+            "ent_type_local": "District",
+            "entity_type": "City"
+        }
+    ],
+    "BRA": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Estado",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Federal District",
+            "ent_type_local": "Distrito Federal",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Município",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Prefeitura",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "BRB": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        }
+    ],
+    "BRN": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Daerah-Daerah",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Mukim",
+            "ent_type_local": "Mukim",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "BTN": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Dzongkhag",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Village block",
+            "ent_type_local": "Gewog",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "BWA": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Town",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Sub-district",
+            "ent_type_local": "Sub-district",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Town Council",
+            "ent_type_local": "Town Council",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": "Unknown",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "CAF": [
+        {
+            "ent_type_eng": "Prefecture",
+            "ent_type_local": "Préfecture",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous Commune",
+            "ent_type_local": "Commune Autonome",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Economic Prefecture",
+            "ent_type_local": "Préfecture",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Sub-prefecture",
+            "ent_type_local": "Sous-préfecture",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "CAN": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Territory",
+            "ent_type_local": "Territory",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Census Division",
+            "ent_type_local": "Division de Recensement",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "County",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Comté",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Equivalent Territory",
+            "ent_type_local": "Territoire équivalent",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Regional County Municipality",
+            "ent_type_local": "Municipalité régionale de comt",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "United Counties",
+            "ent_type_local": "United Counties",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Regional Municipality",
+            "ent_type_local": "Regional Municipality",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District Municipality",
+            "ent_type_local": "District Municipality",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Regional District",
+            "ent_type_local": "Regional District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Subdivision of unorganized",
+            "ent_type_local": "Subdivision non organisée",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Town",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Indian reserve",
+            "ent_type_local": "Réserve indienne",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Rural municipality",
+            "ent_type_local": "Rural municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Fire district",
+            "ent_type_local": "Fire district",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Resort municipality",
+            "ent_type_local": "Resort municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipal district",
+            "ent_type_local": "Municipal district",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Regional municipality",
+            "ent_type_local": "Regional municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Subdivision of county municipa",
+            "ent_type_local": "Subdivision municipalité de co",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Paroisse (municipalité de)",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Village",
+            "ent_type_local": "Village",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Cité",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Rural community",
+            "ent_type_local": "Communauté rurale",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Ville",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Regional municipality",
+            "ent_type_local": "Municipalité régionale",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipalité",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Ville",
+            "ent_type_local": "Ville",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Unorganized",
+            "ent_type_local": "Non organisé",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Canton",
+            "ent_type_local": "Canton (municipalité de)",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "United townships",
+            "ent_type_local": "Cantons unis (municipalité de)",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Indian settlement",
+            "ent_type_local": "Établissement indien",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Naskapi land",
+            "ent_type_local": "Terres réservées aux Naskapis",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Cree village",
+            "ent_type_local": "Village cri",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Regional government",
+            "ent_type_local": "Gouvernement régional",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Naskapi village",
+            "ent_type_local": "Village naskapi",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Northern village",
+            "ent_type_local": "Village nordique",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Land reserved for Crees",
+            "ent_type_local": "Terres réservées aux Cris",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Inuit land",
+            "ent_type_local": "Terre inuite",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Township",
+            "ent_type_local": "Township",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Ville",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Local government district",
+            "ent_type_local": "Local government district",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Resort village",
+            "ent_type_local": "Resort village",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Crown colony",
+            "ent_type_local": "Colonie de la couronne",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Northern village",
+            "ent_type_local": "Northern village",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Northern hamlet",
+            "ent_type_local": "Northern hamlet",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Improvement district",
+            "ent_type_local": "Improvement district",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Special area",
+            "ent_type_local": "Special area",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Summer village",
+            "ent_type_local": "Summer village",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Specialized municipality",
+            "ent_type_local": "Specialized municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "District municipality",
+            "ent_type_local": "District municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Regional district electoral ar",
+            "ent_type_local": "Regional district electoral ar",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Island Municipality",
+            "ent_type_local": "Island Municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Tsawwassen Lands",
+            "ent_type_local": "Tsawwassen Lands",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Tlaamin Lands",
+            "ent_type_local": "Tlaamin Lands",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Nisgaa land",
+            "ent_type_local": "Nisgaa land",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Self-government",
+            "ent_type_local": "Autonomie gouvernementale",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Settlement",
+            "ent_type_local": "Établissement",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Hamlet",
+            "ent_type_local": "Hamlet",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Teslin land",
+            "ent_type_local": "Teslin land",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Chartered community",
+            "ent_type_local": "Chartered community",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Settlement",
+            "ent_type_local": "Settlement",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Community government",
+            "ent_type_local": "Community government",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Indian government district",
+            "ent_type_local": "Indian government district",
+            "entity_type": "City"
+        }
+    ],
+    "CHE": [
+        {
+            "ent_type_eng": "Canton",
+            "ent_type_local": "Kanton",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Canton",
+            "ent_type_local": "Canton",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Canton",
+            "ent_type_local": "Cantone",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Commune",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "CHL": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Región",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Metropolian Region",
+            "ent_type_local": "Región Metropolitana",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Comuna",
+            "entity_type": "City"
+        }
+    ],
+    "CHN": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "直辖市",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "省",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous Region",
+            "ent_type_local": "自治区",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Special District",
+            "ent_type_local": "特别行政区",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Prefecture",
+            "ent_type_local": "地区",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "League",
+            "ent_type_local": "盟",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Prefecture City",
+            "ent_type_local": "地级市",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Autonomous Prefecture",
+            "ent_type_local": "自治州",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "市辖区",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Banner",
+            "ent_type_local": "旗",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "县",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "County City",
+            "ent_type_local": "县级市",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Autonomous County",
+            "ent_type_local": "自治县",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Autonomous Banner",
+            "ent_type_local": "自治旗",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Special District",
+            "ent_type_local": "特区",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Administrative Zone",
+            "ent_type_local": "行政管理区",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Forestry Area",
+            "ent_type_local": "林区",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "CIV": [
+        {
+            "ent_type_eng": "Autonomous district",
+            "ent_type_local": "District autonome",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Région",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Département",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Sub-prefecture",
+            "ent_type_local": "Sous-préfecture",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "CMR": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Région",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Departement",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Urban Commune",
+            "ent_type_local": "Commune Urbaine",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Rural municipality",
+            "ent_type_local": "Commune rurale",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "District Municipality",
+            "ent_type_local": "Commune d’arrondissement",
+            "entity_type": "City"
+        }
+    ],
+    "COD": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Territory",
+            "ent_type_local": "Territoire",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Ville",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "COG": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Région",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "COK": [
+        {
+            "ent_type_eng": "Island Council",
+            "ent_type_local": "Island Council",
+            "entity_type": "Region"
+        }
+    ],
+    "COL": [
+        {
+            "ent_type_eng": "Commissiary",
+            "ent_type_local": "Comisaría",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Departamento",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Intendancy",
+            "ent_type_local": "Intendencia",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Capital District",
+            "ent_type_local": "Distrito Capital",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Corregimiento Departamental",
+            "ent_type_local": "Corregimiento Departamental",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Islands",
+            "ent_type_local": "Islas",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "COM": [
+        {
+            "ent_type_eng": "Autonomous Island",
+            "ent_type_local": "Autonomous Island",
+            "entity_type": "Region"
+        }
+    ],
+    "CPV": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Concelho",
+            "entity_type": "Region"
+        }
+    ],
+    "CRI": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Canton",
+            "ent_type_local": "Cantón",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Distrito",
+            "entity_type": "City"
+        }
+    ],
+    "CUB": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "CYM": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        }
+    ],
+    "CYP": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Eparchies",
+            "entity_type": "Region"
+        }
+    ],
+    "CZE": [
+        {
+            "ent_type_eng": "Capital City Prague",
+            "ent_type_local": "Hlavni mesto Praha",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Kraj",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality with extended jurisdiction",
+            "ent_type_local": "Obec s rozšířenou působností",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality with authorized municipal office",
+            "ent_type_local": "Obec s pověřeným obecním úřadem",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Obec",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Statutory City",
+            "ent_type_local": "Statutární město",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Market Town",
+            "ent_type_local": "Město",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Městys",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City Districts",
+            "ent_type_local": "Městské část",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City Sectors",
+            "ent_type_local": "Městské obvody",
+            "entity_type": "City"
+        }
+    ],
+    "DEU": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Land",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Free State",
+            "ent_type_local": "Freistaat",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Freie Hansestadt",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Freie und Hansestadt",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Freistaat",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Landkreis",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Stadtkreis",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Kreisfreie Stadt",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Kreis",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Verwaltungsgemeinschaft",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Einheitsgemeinde",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Verwaltungsverband",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Gemeindefreies Gebiet",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Amtsfreie Gemeinde",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Amt",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Gemeinschaftsfreie Gemeinde",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Samtgemeinde",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Verbandsgemeinde",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Verbandsfreie Gemeinde",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Erfüllende Gemeinde",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Gemeinde",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Stadt",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Gemeindefreies Gebiet",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "DJI": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": NaN,
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "SubRegion"
+        }
+    ],
+    "DMA": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "DNK": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Kommune",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "DOM": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "National District",
+            "ent_type_local": "Distrito",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipal district",
+            "ent_type_local": "Distrito municipal",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "DZA": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Wilaya",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Chef-Lieu-Wilaya",
+            "ent_type_local": "Chef-Lieu-Wilaya",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune-Cotiere",
+            "ent_type_local": "Commune-Cotiere",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "ECU": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Canton",
+            "ent_type_local": "Canton",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Distrito Metropolitano",
+            "ent_type_local": "Canton",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Cantonal Head",
+            "ent_type_local": "Cabecera Cantonal",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Rural Parish",
+            "ent_type_local": "Parroquia Rural",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "EGY": [
+        {
+            "ent_type_eng": "Governorate",
+            "ent_type_local": "Muhafazah",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Subdivision",
+            "ent_type_local": "Markaz",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Subdivision",
+            "ent_type_local": "Kism",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Subdivision",
+            "ent_type_local": "unorganized",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Subdivision",
+            "ent_type_local": "City",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Subdivision",
+            "ent_type_local": "Police-administered area",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "ERI": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Zoba",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "ESH": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Willaya",
+            "entity_type": "Region"
+        }
+    ],
+    "ESP": [
+        {
+            "ent_type_eng": "Autonomous Community",
+            "ent_type_local": "Comunidad autónoma",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous City",
+            "ent_type_local": "Ciudades Autónomas",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous Community",
+            "ent_type_local": "Territories not associated with any autonomy",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Territory",
+            "ent_type_local": "Territorio",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "EST": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Maakond",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Vald",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Linn",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Village",
+            "ent_type_local": "Küla",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Small town",
+            "ent_type_local": "Alevik",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Linn",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Alev",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Administrative District",
+            "ent_type_local": "Linnaosa",
+            "entity_type": "City"
+        }
+    ],
+    "ETH": [
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Astedader",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Kilil",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Zone",
+            "ent_type_local": "Zone",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Zone",
+            "ent_type_local": "Special Woreda",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Special Woreda",
+            "ent_type_local": "Special Woreda",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Woreda",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Other",
+            "ent_type_local": "Other",
+            "entity_type": "City"
+        }
+    ],
+    "FIN": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Maakunta",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Kunta",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "FJI": [
+        {
+            "ent_type_eng": "Division",
+            "ent_type_local": "Division",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "FRA": [
+        {
+            "ent_type_eng": "Metropolitan region",
+            "ent_type_local": "Région métropolitaine",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Overseas region",
+            "ent_type_local": "Région d’outre-mer",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Metropolitan department",
+            "ent_type_local": "Département métropolitain",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Collective of Corsica",
+            "ent_type_local": "Collectivité de Corse",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Department with Special Status",
+            "ent_type_local": "Département à statut particulier",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Community of Communes",
+            "ent_type_local": "Communauté de communes",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Agglomeration Community",
+            "ent_type_local": "Communauté d'agglomération",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Urban Community",
+            "ent_type_local": "Communauté urbaine",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Territorial Public Establishment",
+            "ent_type_local": "Etablissement public territorial",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Metropolis",
+            "ent_type_local": "Métropole",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Simple Commune",
+            "ent_type_local": "Commune simple",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Subprefecture",
+            "ent_type_local": "Sous-préfecture",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Prefecture",
+            "ent_type_local": "Préfecture",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Regional Prefecture",
+            "ent_type_local": "Préfecture de région",
+            "entity_type": "City"
+        }
+    ],
+    "FRO": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Syssel",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Kommunur",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "FSM": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "State",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Atol",
+            "ent_type_local": "Atol",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Reef",
+            "ent_type_local": "Reef",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "GAB": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Département",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "GBR": [
+        {
+            "ent_type_eng": "Constituent Country",
+            "ent_type_local": "Constituent Country",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "unitary authority",
+            "ent_type_local": "unitary authority",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "metropolitan district",
+            "ent_type_local": "metropolitan district",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "london borough",
+            "ent_type_local": "london borough",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "county",
+            "ent_type_local": "county",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "local government district",
+            "ent_type_local": "local government district",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "council area",
+            "ent_type_local": "council area",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "non-metropolitan district",
+            "ent_type_local": "non-metropolitan district",
+            "entity_type": "City"
+        }
+    ],
+    "GEO": [
+        {
+            "ent_type_eng": "Autonomous Republic",
+            "ent_type_local": "Avtonomiuri Respublika",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Independent City",
+            "ent_type_local": "K'alak'i",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Raioni",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "K'alak'i",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "GGY": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        }
+    ],
+    "GHA": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "GIN": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Prefecture",
+            "ent_type_local": "Préfecture",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Sub-prefecture",
+            "ent_type_local": "Sub-prefecture",
+            "entity_type": "City"
+        }
+    ],
+    "GLP": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Arrondissement",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Chef-lieu canton",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune simple",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Préfecture de région",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Sous-préfecture",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "GMB": [
+        {
+            "ent_type_eng": "Independent City",
+            "ent_type_local": "Independent City",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Division",
+            "ent_type_local": "Division",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "GNB": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Região",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous Sector",
+            "ent_type_local": "Sector Autónomo",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Sector",
+            "ent_type_local": "Sector",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "GNQ": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Districts|Municipals",
+            "ent_type_local": "Districts",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "GRC": [
+        {
+            "ent_type_eng": "Decentralized Administration",
+            "ent_type_local": "Apokentroméni Dioíkisi",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous Monastic State of the Holy Mountain",
+            "ent_type_local": "Aftónomo Monastikó Krátos tou Agíou Órous",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Periféreia",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Regional Unit",
+            "ent_type_local": "Perifereiakí Enótita",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Dímos",
+            "entity_type": "City"
+        }
+    ],
+    "GRD": [
+        {
+            "ent_type_eng": "Dependency",
+            "ent_type_local": "Dependency",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        }
+    ],
+    "GRL": [
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Kommuner",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "National Park",
+            "ent_type_local": "National Park",
+            "entity_type": "Region"
+        }
+    ],
+    "GTM": [
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Departamento",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "GUF": [
+        {
+            "ent_type_eng": "Arrondissement",
+            "ent_type_local": "Arrondissement",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "GUM": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "Region"
+        }
+    ],
+    "GUY": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Not Classified",
+            "ent_type_local": "Not Classified",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Neighbourhood Democratic",
+            "ent_type_local": "Neighbourhood Democratic Council",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Conservancy",
+            "ent_type_local": "Conservancy",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "HND": [
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Departamento",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "HRV": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Županija",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Grad",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Općina",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Grad",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "HTI": [
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Département",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Arrondissement",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "City"
+        }
+    ],
+    "HUN": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Vármegye",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Capital City",
+            "ent_type_local": "Budapest Főváros",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Járás",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Village",
+            "ent_type_local": "Község",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Város",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City of County Rank",
+            "ent_type_local": "Megyei Jogú Város",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Capital District",
+            "ent_type_local": "Fővárosi Kerület",
+            "entity_type": "City"
+        }
+    ],
+    "IDN": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provinsi",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Special Region",
+            "ent_type_local": "Daerah Istimewa",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Special Capital Region",
+            "ent_type_local": "DKI",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Regency",
+            "ent_type_local": "Kabupaten",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Kota",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Administrative City",
+            "ent_type_local": "Kota Administrasi",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "IMN": [
+        {
+            "ent_type_eng": "Parish District",
+            "ent_type_local": "Parish District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Town District",
+            "ent_type_local": "Town District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Village District",
+            "ent_type_local": "Village District",
+            "entity_type": "Region"
+        }
+    ],
+    "IND": [
+        {
+            "ent_type_eng": "Union Territory",
+            "ent_type_local": "Union Territory",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "State",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Cantonment",
+            "ent_type_local": "Cantonment",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipal Council",
+            "ent_type_local": "Municipal Council",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipal Corporation",
+            "ent_type_local": "Municipal Corporation",
+            "entity_type": "City"
+        }
+    ],
+    "IRL": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "County",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipal District",
+            "ent_type_local": "Municipal District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "County",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City Council",
+            "ent_type_local": "City Council",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Metropolitan District",
+            "ent_type_local": "Metropolitan District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Borough District",
+            "ent_type_local": "Borough District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "IRN": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Ostān",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Shahrestan",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "IRQ": [
+        {
+            "ent_type_eng": "Governorate",
+            "ent_type_local": "Muhafadhah",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Qadha",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Sub-District",
+            "ent_type_local": "Nawahi",
+            "entity_type": "City"
+        }
+    ],
+    "ISL": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Landsvæði",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Independent Town",
+            "ent_type_local": "Kaupstadir",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Sveitarfélög",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "ISR": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Mehoz",
+            "entity_type": "Region"
+        }
+    ],
+    "ITA": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Regione",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Metropolitan city",
+            "ent_type_local": "Città metropolitana",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Autonomous province",
+            "ent_type_local": "Provincia autonoma",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Non-administrative unit",
+            "ent_type_local": "Unità non amministrativa",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Free municipal consortium",
+            "ent_type_local": "Libero consorzio di comuni",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Comune",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "JAM": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        }
+    ],
+    "JEY": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        }
+    ],
+    "JOR": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Muhafazah",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Sub-Province",
+            "ent_type_local": "Nahia",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "JPN": [
+        {
+            "ent_type_eng": "Prefecture",
+            "ent_type_local": "都道府県",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "市",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "町",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Village",
+            "ent_type_local": "村",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Ward",
+            "ent_type_local": "区",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "KAZ": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Oblys",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Qalasy",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Rayon",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Qalasy",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "KEN": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "County",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Constituency",
+            "ent_type_local": "Constituency",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Ward",
+            "ent_type_local": "Ward",
+            "entity_type": "City"
+        }
+    ],
+    "KGZ": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Oblast",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Shaar",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Rayon",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "KHM": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Khêt",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Krong",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Srok",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Khum",
+            "entity_type": "City"
+        }
+    ],
+    "KIR": [
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "KNA": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        }
+    ],
+    "KOR": [
+        {
+            "ent_type_eng": "Metropolitan City",
+            "ent_type_local": "Gwangyeoksi",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Do",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Metropolitan Autonomous City",
+            "ent_type_local": "Do",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Capital Metropolitan City",
+            "ent_type_local": "Teukbyeolsi",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Metropolitan City",
+            "ent_type_local": "Metropolitan City",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Gu",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Gun",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Si",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Neighborhood",
+            "ent_type_local": "Dong",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Township",
+            "ent_type_local": "Myeon",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Eup",
+            "entity_type": "City"
+        }
+    ],
+    "KWT": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Muhafazah",
+            "entity_type": "Region"
+        }
+    ],
+    "LAO": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Khoueng",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality|Prefecture",
+            "ent_type_local": "Kampeng Nakhon",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Special Region|Zone",
+            "ent_type_local": "Khetphiset",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Muong",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "LBN": [
+        {
+            "ent_type_eng": "Governorate",
+            "ent_type_local": "Muhafazah",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Qadaa",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "LBR": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "County",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Clan",
+            "ent_type_local": "Clan",
+            "entity_type": "City"
+        }
+    ],
+    "LBY": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Shabiyah",
+            "entity_type": "Region"
+        }
+    ],
+    "LCA": [
+        {
+            "ent_type_eng": "Quarter",
+            "ent_type_local": "Quarter",
+            "entity_type": "Region"
+        }
+    ],
+    "LIE": [
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Gemeinden",
+            "entity_type": "Region"
+        }
+    ],
+    "LKA": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Distrikkaya",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Division",
+            "ent_type_local": "Division",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "LSO": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        }
+    ],
+    "LTU": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Apskritis",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Savivaldybė",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "LUX": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Canton",
+            "ent_type_local": "Canton",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "City"
+        }
+    ],
+    "LVA": [
+        {
+            "ent_type_eng": "State City",
+            "ent_type_local": "Valstspilsēta",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Novads",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Pagasts",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Pilsēta",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Village",
+            "ent_type_local": "Ciemi",
+            "entity_type": "City"
+        }
+    ],
+    "MAR": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Prefecture",
+            "ent_type_local": "Prefecture",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "MDA": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipiu",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Raion",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous Territorial Unit",
+            "ent_type_local": "Unitatea Teritorială Autonomă",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Administrative-Territorial Unit",
+            "ent_type_local": "Unitățile Administrativ-Teritoriale",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Village",
+            "ent_type_local": "Sat",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Oraş",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipiu",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Locality of Village",
+            "ent_type_local": "Localitate satului",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "MDG": [
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "City"
+        }
+    ],
+    "MEX": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Estado",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Federal District",
+            "ent_type_local": "Distrito Federal",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Município",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "MHL": [
+        {
+            "ent_type_eng": "Atol",
+            "ent_type_local": "Atol",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Island",
+            "ent_type_local": "Island",
+            "entity_type": "Region"
+        }
+    ],
+    "MKD": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Opština",
+            "entity_type": "Region"
+        }
+    ],
+    "MLI": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Région",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Circle",
+            "ent_type_local": "Cercle",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "MLT": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Reġjun",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Local council",
+            "ent_type_local": "Kunsil lokal",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "MMR": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "တိုင်းဒေသကြီး်",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "ပြည်နယ်",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Union Territory",
+            "ent_type_local": "ပြည်ထောင်စုနယ်မြေ",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Self-administered zone",
+            "ent_type_local": "ကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရ ဒေသ",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Self-administered zone",
+            "ent_type_local": "ကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရတိုင်း",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "ခရိုင်",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Township",
+            "ent_type_local": "မြို့နယ်",
+            "entity_type": "City"
+        }
+    ],
+    "MNE": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Opština",
+            "entity_type": "Region"
+        }
+    ],
+    "MNG": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Aimag",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Hot",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Sum",
+            "ent_type_local": "Soum",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "MNP": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "Region"
+        }
+    ],
+    "MOZ": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City with provincial status",
+            "ent_type_local": "Cidade com estatuto de província",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Distrito",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Administrative Post",
+            "ent_type_local": "Posto administrativo",
+            "entity_type": "City"
+        }
+    ],
+    "MRT": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Wilayat|Région",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Moughataas|Département",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "MSR": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        }
+    ],
+    "MTQ": [
+        {
+            "ent_type_eng": "Arrondissement",
+            "ent_type_local": "Arrondissement",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "MUS": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous island",
+            "ent_type_local": "Autonomous island",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "MWI": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Town",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Traditional Authority",
+            "ent_type_local": "Traditional Authority",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Headquarter",
+            "ent_type_local": "Boma",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "National Park",
+            "ent_type_local": "National Park",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Reserve",
+            "ent_type_local": "Reserve",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Urban",
+            "ent_type_local": "Urban",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Sub-chief",
+            "ent_type_local": "Sub-chief",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "MYS": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Negeri",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Federal Territory",
+            "ent_type_local": "Wilayah Persekutuan",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Daerah",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Federal Territory",
+            "ent_type_local": "Wilayah Persekutuan",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "MYT": [
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Chef-lieu canton",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Préfecture de région",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Sous-préfecture",
+            "entity_type": "Region"
+        }
+    ],
+    "NAM": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Constituency",
+            "ent_type_local": "Constituency",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "NCL": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Islands",
+            "ent_type_local": "Islands",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "NER": [
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Département",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Capital District",
+            "ent_type_local": "Communauté Urbaine",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Arrondissement",
+            "ent_type_local": "Arrondissement",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "City"
+        }
+    ],
+    "NGA": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "State",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Local Authority",
+            "ent_type_local": "Local Authority",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "NIC": [
+        {
+            "ent_type_eng": "Autonomous Region",
+            "ent_type_local": "Región Autónoma",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Departamento",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "NLD": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincie",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Gemeente",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "NOR": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Fylke",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Kommuner",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "NPL": [
+        {
+            "ent_type_eng": "Development Region",
+            "ent_type_local": "Vikas Kshetra",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Administrative Zone",
+            "ent_type_local": "Anchal",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Jilla",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Village development committee",
+            "ent_type_local": "Village development committee",
+            "entity_type": "City"
+        }
+    ],
+    "NRU": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        }
+    ],
+    "NZL": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Territory",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Group of islands",
+            "ent_type_local": "Group of islands",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Area Outside Territorial Authori",
+            "ent_type_local": "Area Outside Territorial Authori",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Territory",
+            "ent_type_local": "Territory",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "OMN": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Mintaqah",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Muhafazah",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Wilayat",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Wilayat",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "PAK": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Territory",
+            "ent_type_local": "Territory",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Capital Territory",
+            "ent_type_local": "Capital Territory",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Division",
+            "ent_type_local": "Division",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "City"
+        }
+    ],
+    "PAN": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Indigenous Territory",
+            "ent_type_local": "Comarca Indígena",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Distrito",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Indigenous Territory",
+            "ent_type_local": "Comarca Indígena",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Corregimiento",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Indigenous Territory",
+            "ent_type_local": "Comarca Indígena",
+            "entity_type": "City"
+        }
+    ],
+    "PER": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Región",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provincia",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Distrito",
+            "entity_type": "City"
+        }
+    ],
+    "PHL": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Lalawigan",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Bayan|Munisipyo",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Lungsod|Siyudad",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "PLW": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "State",
+            "entity_type": "Region"
+        }
+    ],
+    "PNG": [
+        {
+            "ent_type_eng": "Autonomous Region",
+            "ent_type_local": "Autonomous Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "POL": [
+        {
+            "ent_type_eng": "Voivodeship",
+            "ent_type_local": "Województwo",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Powiat",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City with powiat rights",
+            "ent_type_local": "Miasto na prawach powiatu",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality (urban)",
+            "ent_type_local": "Gmina (urban)",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality (rural)",
+            "ent_type_local": "Gmina (rural)",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality (urban-rural)",
+            "ent_type_local": "Gmina (urban-rural)",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City County",
+            "ent_type_local": "Miasto na prawach powiatu",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Miasto na prawach powiatu",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "PRI": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio|Senatorial District",
+            "entity_type": "Region"
+        }
+    ],
+    "PRK": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Do",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Special Administrative Region",
+            "ent_type_local": "T'ŭkbyŏl Haengjeonggu",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Special City",
+            "ent_type_local": "Si",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Directly Governed City",
+            "ent_type_local": "Teukbyeolsi",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Gun",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Si",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Ward",
+            "ent_type_local": "Guyŏk",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "PRT": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Distrito",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous Region",
+            "ent_type_local": "Regiões autônoma",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Concelho",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "PRY": [
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Departamento",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Capital District",
+            "ent_type_local": "Distrito Capital",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Distrito",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "PSE": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Governorate",
+            "ent_type_local": "Governorate",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "PYF": [
+        {
+            "ent_type_eng": "Administrative subdivisions",
+            "ent_type_local": "Subdivisions administratives",
+            "entity_type": "Region"
+        }
+    ],
+    "QAT": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Baladiyah",
+            "entity_type": "Region"
+        }
+    ],
+    "REU": [
+        {
+            "ent_type_eng": "Arrondissement",
+            "ent_type_local": "Arrondissement",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "ROU": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Judet",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipiu",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Comuna",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Oras",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipiu",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Sector of Bucharest",
+            "ent_type_local": "Sectoarele municipiului Bucuresti",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "RUS": [
+        {
+            "ent_type_eng": "Republic",
+            "ent_type_local": "Республика",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Oblast",
+            "ent_type_local": "Область",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Territory",
+            "ent_type_local": "Край",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous Okrug",
+            "ent_type_local": "Автономный округ",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Federal City",
+            "ent_type_local": "Город федерального значения",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous Oblast",
+            "ent_type_local": "Автономная область",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Raion",
+            "ent_type_local": "муниципальный район",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Okrug",
+            "ent_type_local": "городской округ",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Okrug",
+            "ent_type_local": "муниципальный округ",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Intradistrict Territory",
+            "ent_type_local": "внутригородская территория (внутригородское муниципальное образование) города федерального значения",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Okrug",
+            "ent_type_local": "городской округ с внутригородским делением",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "RWA": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SAU": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Minṭaqah",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Governorate",
+            "ent_type_local": "Muhafazah",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "SDN": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Wilayat",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": "Unknown",
+            "entity_type": "City"
+        }
+    ],
+    "SEN": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Région",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Département",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SGP": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        }
+    ],
+    "SHN": [
+        {
+            "ent_type_eng": "Administrative Area",
+            "ent_type_local": "Administrative Area",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Dependency",
+            "ent_type_local": "Dependency",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SJM": [
+        {
+            "ent_type_eng": "Territory",
+            "ent_type_local": "Territory",
+            "entity_type": "Region"
+        }
+    ],
+    "SLB": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Capital Territory",
+            "ent_type_local": "Capital Territory",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Ward",
+            "ent_type_local": "Ward",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SLE": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Area",
+            "ent_type_local": "Area",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Chiefdom",
+            "ent_type_local": "Chiefdom",
+            "entity_type": "City"
+        }
+    ],
+    "SLV": [
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Departamento",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SMR": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Castello",
+            "entity_type": "Region"
+        }
+    ],
+    "SOM": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Gobolka",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SPM": [
+        {
+            "ent_type_eng": "Commune",
+            "ent_type_local": "Commune",
+            "entity_type": "Region"
+        }
+    ],
+    "SRB": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Okrug",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Grad",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Town|Municipal",
+            "ent_type_local": "Opštine",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SSD": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Wilayat",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": "Unknown",
+            "entity_type": "City"
+        }
+    ],
+    "STP": [
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Concelho",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SUR": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Distrikt",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Ressort",
+            "ent_type_local": "Ressort",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SVK": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Kraj",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Okres",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SVN": [
+        {
+            "ent_type_eng": "Statistical Region",
+            "ent_type_local": "Statisticna Regije",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Commune|Municipality",
+            "ent_type_local": "Opcine",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SWE": [
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Län",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Kommun",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "SWZ": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Constituency",
+            "ent_type_local": "Inkhundla",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "SYC": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Outer Islands",
+            "ent_type_local": "Outer Islands",
+            "entity_type": "Region"
+        }
+    ],
+    "SYR": [
+        {
+            "ent_type_eng": "Governorate",
+            "ent_type_local": "Muḥāfaẓah",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Mantika",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "TCA": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        }
+    ],
+    "TCD": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Région",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Department",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Sub-prefecture",
+            "ent_type_local": "Sub-prefecture",
+            "entity_type": "City"
+        }
+    ],
+    "TGO": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Région",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Prefecture",
+            "ent_type_local": "Préfécture",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Commune",
+            "entity_type": "City"
+        }
+    ],
+    "THA": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Changwat",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Amphoe",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Khet",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Minor district",
+            "ent_type_local": "King Amphoe",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Sub district",
+            "ent_type_local": "Tambon",
+            "entity_type": "City"
+        }
+    ],
+    "TJK": [
+        {
+            "ent_type_eng": "Districts of Republican Subordin",
+            "ent_type_local": "Districts of Republican Subordin",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autonomous Region",
+            "ent_type_local": "Vilojati Muxtori",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Viloyat",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Nohiya",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "TKL": [
+        {
+            "ent_type_eng": "Atoll",
+            "ent_type_local": "Atoll",
+            "entity_type": "Region"
+        }
+    ],
+    "TKM": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Welayat",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Captial City District",
+            "ent_type_local": "Captial City District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Etrap",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Şäher",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Borough",
+            "ent_type_local": "Uly etrap",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "TLS": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Distrito",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Subdistrict",
+            "ent_type_local": "Subdistrito",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Community",
+            "ent_type_local": "Suco",
+            "entity_type": "City"
+        }
+    ],
+    "TON": [
+        {
+            "ent_type_eng": "Island Group",
+            "ent_type_local": "Island Group",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "TTO": [
+        {
+            "ent_type_eng": "Borough",
+            "ent_type_local": "Borough",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Region",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "TUN": [
+        {
+            "ent_type_eng": "Governorate",
+            "ent_type_local": "Wilayat",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Delegation",
+            "ent_type_local": "Delegation",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "TUR": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "İl",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "İlçe",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "TUV": [
+        {
+            "ent_type_eng": "Town Council",
+            "ent_type_local": "Town Council",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Island Council",
+            "ent_type_local": "Island Council",
+            "entity_type": "Region"
+        }
+    ],
+    "TWN": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Shěng",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Special Municipality",
+            "ent_type_local": "Zhíxiáshì",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "Xiàn",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Provincial City",
+            "ent_type_local": "Shì",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Special Municipality",
+            "ent_type_local": "Zhíxiáshì",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "TZA": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Mkoa",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Wilaya",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Ward",
+            "ent_type_local": "Wodi",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Islands",
+            "ent_type_local": "Wodi",
+            "entity_type": "City"
+        }
+    ],
+    "UGA": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "County",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "UKR": [
+        {
+            "ent_type_eng": "Autonomous Republic",
+            "ent_type_local": "Автономна Республіка Крим",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Область",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City with special status",
+            "ent_type_local": "Місто зі спеціальним статусом",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Район",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Exclusion zone of the Chornobyl nuclear power plant",
+            "ent_type_local": "Зона відчуження Чорнобильської атомної електростанції",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Territorial community",
+            "ent_type_local": "Громада",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Mіста",
+            "entity_type": "City"
+        }
+    ],
+    "UMI": [
+        {
+            "ent_type_eng": "Island",
+            "ent_type_local": "Island",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Atoll",
+            "ent_type_local": "Atoll",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Reef",
+            "ent_type_local": "Reef",
+            "entity_type": "Region"
+        }
+    ],
+    "URY": [
+        {
+            "ent_type_eng": "Department",
+            "ent_type_local": "Departamento",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipiality",
+            "ent_type_local": "Municipio",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "USA": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "State",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Federal District",
+            "ent_type_local": "Federal District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "County",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Borough",
+            "ent_type_local": "Borough",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Census Area",
+            "ent_type_local": "Census Area",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City and Borough",
+            "ent_type_local": "City And Borough",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City and County",
+            "ent_type_local": "City And County",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Independent City",
+            "ent_type_local": "Independent City",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "County",
+            "ent_type_local": "City",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Town",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Borough",
+            "ent_type_local": "Borough",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Village",
+            "ent_type_local": "Village",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Unified Government",
+            "ent_type_local": "Unified Government",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Metro Township",
+            "ent_type_local": "Metro Township",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "City And Borough",
+            "ent_type_local": "City And Borough",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Utqiag?Vik City",
+            "ent_type_local": "Utqiag?Vik City",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Consolidated Government",
+            "ent_type_local": "Consolidated Government",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Urban County",
+            "ent_type_local": "Urban County",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Metro Government",
+            "ent_type_local": "Metro Government",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Metropolitan Government",
+            "ent_type_local": "Metropolitan Government",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Corporation",
+            "ent_type_local": "Corporation",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "UZB": [
+        {
+            "ent_type_eng": "Region",
+            "ent_type_local": "Wiloyat",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Autononous Region",
+            "ent_type_local": "Repuplikasi",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Shahar",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "VCT": [
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parish",
+            "entity_type": "Region"
+        }
+    ],
+    "VEN": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "Estado",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Capital District",
+            "ent_type_local": "Distrito Capital",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Federal Dependencies",
+            "ent_type_local": "Dependencias Federales",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipio",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Parish",
+            "ent_type_local": "Parroquia",
+            "entity_type": "City"
+        }
+    ],
+    "VGB": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        }
+    ],
+    "VIR": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": "Subdistrict",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "VNM": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Tỉnh",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Thành phố",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Huyện",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "Thành phố",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Town",
+            "ent_type_local": "Thị xã",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Urban District",
+            "ent_type_local": "Quận",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "VUT": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Area council",
+            "ent_type_local": "Area council",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Municipality",
+            "ent_type_local": "Municipality",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "WLF": [
+        {
+            "ent_type_eng": "Kingdom",
+            "ent_type_local": "Kingdom",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "WSM": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Itumalo",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": "Unknown",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "XAD": [
+        {
+            "ent_type_eng": "Sovereign Base Area",
+            "ent_type_local": "Sovereign Base Area",
+            "entity_type": "Region"
+        }
+    ],
+    "XKO": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Okrug",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Town|Municipal",
+            "ent_type_local": "Opštine",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "YEM": [
+        {
+            "ent_type_eng": "Governorate",
+            "ent_type_local": "Muhafazah",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Muderiah",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "Z01": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "State",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "Z02": [
+        {
+            "ent_type_eng": "Autonomous Region",
+            "ent_type_local": "Zìzhìqu",
+            "entity_type": "Region"
+        }
+    ],
+    "Z03": [
+        {
+            "ent_type_eng": "Autonomous Region",
+            "ent_type_local": "Zìzhìqu",
+            "entity_type": "Region"
+        }
+    ],
+    "Z04": [
+        {
+            "ent_type_eng": "Union Territory",
+            "ent_type_local": "Union Territor",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "Z05": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "State",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "Z06": [
+        {
+            "ent_type_eng": "Centrally Administered Area",
+            "ent_type_local": "Centrally Administered Area",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "City"
+        }
+    ],
+    "Z07": [
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "State",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "Z08": [
+        {
+            "ent_type_eng": "Autonomous Region",
+            "ent_type_local": "Zìzhìqu",
+            "entity_type": "Region"
+        }
+    ],
+    "Z09": [
+        {
+            "ent_type_eng": "Union Territory",
+            "ent_type_local": "Union Territor",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "State",
+            "ent_type_local": "State",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Taluk",
+            "ent_type_local": "Taluk",
+            "entity_type": "City"
+        }
+    ],
+    "ZAF": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Provinsie",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District Municipality",
+            "ent_type_local": "District Municipality",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": "Local Municipality",
+            "ent_type_local": "Local Municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": "Metropolitan Municipality",
+            "ent_type_local": "Metropolitan Municipality",
+            "entity_type": "City"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ],
+    "ZMB": [
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        }
+    ],
+    "ZNC": [
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "Kaza",
+            "entity_type": "Region"
+        }
+    ],
+    "ZWE": [
+        {
+            "ent_type_eng": "City",
+            "ent_type_local": "City",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "Province",
+            "ent_type_local": "Province",
+            "entity_type": "Region"
+        },
+        {
+            "ent_type_eng": "District",
+            "ent_type_local": "District",
+            "entity_type": "SubRegion"
+        },
+        {
+            "ent_type_eng": NaN,
+            "ent_type_local": NaN,
+            "entity_type": "Association"
+        }
+    ]
+}

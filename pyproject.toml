@@ -1,0 +1,24 @@
+[tool.black]
+line-length = 100          # default: 88
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | report_fetcher_env
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+)
+'''
+
+[tool.isort]
+profile = "black"
+extend_skip = ["report_fetcher_env/*","report_fetcher_env"]
+skip_glob = ["**/*.!(py)"]
