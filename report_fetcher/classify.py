@@ -111,11 +111,13 @@ def is_relevant_pdf(
          • If the document only announces that a report has been published
            (e.g., "City X publishes its Climate Plan"), classify as
            Relevance: No and ReportType: Press release.
-       • Not a multi-region overview; focuses on the target region
-       • Not purely financial-only
+       • Not a multi-region overview; focuses on the target region.
+       • Not purely financial-only.
        • Must include some information about climate mitigation, energy or climate adaptation actions or targets, not only about air pollution or water.
 
     4. CorrectCity – “Yes” only if the city is '{city_name}' in {province} of '{country}'.
+       • Only classify as "Yes" if the main subject is exactly that city. If the document focuses on a different city, or multiple cities including the target city, classify as "No".
+       • If the document focuses on private entities (e.g., companies, universities) rather than the city government, classify as "No".
 
     5. Language – the primary language of the document as a 2-letter ISO 639-1 code (e.g., "en", "ja", "zh", "ru", "de", "fr").
 
