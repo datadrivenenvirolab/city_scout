@@ -16,7 +16,7 @@ BASE_DIR = Path.cwd() / "outputs"
 
 DATE_TIME = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
-try: 
+try:
     # {SLURM_JOB_NAME}_${SLURM_JOB_ID}
     SLURM_JOB_NAME = os.getenv("SLURM_JOB_NAME")
     SLURM_JOB_ID = os.getenv("SLURM_JOB_ID")
@@ -72,7 +72,6 @@ ACCEPTABLE_REPORT_TYPES = [
     "CAAP",
     "Climate Action & Adaptation Plan",
     "Climate Change Mitigation Plan",
-
     # Other acceptable report types with climate content
     "Sustainability Report",
     "Environmental Report",
@@ -82,16 +81,14 @@ ACCEPTABLE_REPORT_TYPES = [
     "Emissions Inventory",
     "Energy Transition Strategy",
     "Low-Carbon Strategy",
-
     # Valid but only if excerpt indicates it's the true type
     "Policy Document",
     "Master Plan",
     "Roadmap",
-
     # Required fallbacks
     "Press Release",
     "Brochure",
-    "Summary Document"
+    "Summary Document",
 ]
 
 ACCEPTABLE_REPORT_TYPES_LOWER = [t.lower() for t in ACCEPTABLE_REPORT_TYPES]
@@ -130,7 +127,7 @@ COLUMNS = [
     SUBREGION_NAME_COLUMN,
     REGION_NAME_COLUMN,
     COUNTRY_NAME_COLUMN,
-    SEARCH_FOR_AFTER_COLUMN
+    SEARCH_FOR_AFTER_COLUMN,
 ]
 COLUMNS_IMP = [
     CITY_NAME_COLUMN,
@@ -171,6 +168,11 @@ BAD_KEYWORDS = {
     "disclaimer",
 }
 
+# === Negative Keywords for Search ===
+NEGATIVE_KEYWORDS = [
+    # "job",
+]
+
 # Year regex pattern (compiled in utils)
 YEAR_REGEX = r"\b(19|20)\d{2}\b"
 
@@ -201,4 +203,4 @@ USE_DDGS = False
 USE_SEARCH_CACHE = False
 # USE_SEARCH_CACHE = True
 
-MAX_QUERY_WORDS = 32 # Google search seems to have a 32 word limit from what I checked. So limiting queries to 32 Words. 
+MAX_QUERY_WORDS = 32  # Google search seems to have a 32 word limit from what I checked. So limiting queries to 32 Words.

@@ -38,6 +38,7 @@ from .config import (  # CITY_NAME_COLUMN,; COUNTRY_COLUMN,
     MAX_QUERY_WORDS,
     SEARCH_FOR_AFTER,
     SEARCH_FOR_AFTER_COLUMN,
+    NEGATIVE_KEYWORDS,
 )
 
 # for column in COLUMNS:
@@ -502,6 +503,12 @@ def perform_search(
     
     if file_type_filter:
         query_parts.append(file_type_filter)
+
+    for kw in NEGATIVE_KEYWORDS:
+        if " " in kw:
+            query_parts.append(f'-"{kw}"')
+        else:
+            query_parts.append(f"-{kw}")
     
     # Build multiple queries from search terms
     queries = build_queries_with_limit(query_parts, search_terms_list, max_words_per_query)
