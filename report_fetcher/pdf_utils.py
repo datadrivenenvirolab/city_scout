@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import datetime as _dt
+import hashlib
 import logging
 import os
 import re
@@ -105,9 +106,9 @@ def check_and_save_pdf(
     confirmed_dir = Path(confirmed_dir)
     confirmed_dir.mkdir(parents=True, exist_ok=True)
 
-    # Build a temp filename that includes the last path segment from URL
-    original_basename = os.path.basename(urlparse(pdf_url).path) or "report.pdf"
-    filename = f"{city_name_str.replace(' ', '_')}_{original_basename}"
+    # Build a temp filename that is a hash of the URL
+    url_hash = hashlib.md5(pdf_url.encode("utf-8")).hexdigest()
+    filename = f"{url_hash}.pdf"
     temp_path = temp_dir / filename
 
     logger.info("Processing PDF: %s", pdf_url)
