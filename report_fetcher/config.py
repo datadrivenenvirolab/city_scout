@@ -36,9 +36,10 @@ for p in (BASE_DIR, PDF_DIR, HTML_DIR, TEMP_PDF_DIR):
     p.mkdir(parents=True, exist_ok=True)
 
 # === API / Model Settings ===
+from .prompt_loader import get_llm_config
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 SCALESERP_API_KEY = os.getenv("SCALESERP_API_KEY", "")
-OPENAI_MODEL = "gpt-5-mini"
+OPENAI_MODEL = get_llm_config().get("model", "gpt-5-mini")
 
 # === Report Type Settings (canonical, ordered by priority) ===
 # ACCEPTABLE_REPORT_TYPES = ["Annual", "Integrated", "CSR", "ESG", "Impact", "CDP"]

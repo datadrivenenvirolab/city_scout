@@ -1,0 +1,20 @@
+llm_config:
+  # The identifier of the LLM model to use for classification (e.g., GPT-4o, GPT-3.5-turbo).
+  model: "gpt-5-mini"
+
+  # Controls randomness: 0.0 is deterministic, 1.0 is creative. 0.0 is recommended for classification.
+  temperature: 0.0
+
+  # The maximum length of the model's response in tokens.
+  max_output_tokens: 64
+
+  # Specific to some models: controls the amount of 'thinking' or reasoning steps (e.g., "minimal", "medium", "high").
+  # reasoning_effort: "minimal"
+  # reasoning_effort: "medium"
+  reasoning_effort: "high"
+
+  # Controls how much detail the model provides in its internal text processing (e.g., "low", "high").
+  text_verbosity: "low"
+
+  # The API endpoint for the LLM service. Defaults to OpenAI if commented out.
+  # endpoint: "https://api.openai.com/v1"

@@ -256,133 +256,32 @@ def run_scraper_from_df(
     )
 
     for row_dict in iterator:
-        # print(type(row_dict.get(SUBREGION_NAME_COLUMN) ))
-        city = (str(row_dict.get(CITY_NAME_COLUMN, "")) or "").strip()
-        region = (str(row_dict.get(REGION_NAME_COLUMN, "")) or "").strip()
-        country = (str(row_dict.get(COUNTRY_NAME_COLUMN, "")) or "").strip()
-        subregion = (str(row_dict.get(SUBREGION_NAME_COLUMN,"")) or "").strip()
+        try:
+            # print(type(row_dict.get(SUBREGION_NAME_COLUMN) ))
+            city = (str(row_dict.get(CITY_NAME_COLUMN, "")) or "").strip()
+            region = (str(row_dict.get(REGION_NAME_COLUMN, "")) or "").strip()
+            country = (str(row_dict.get(COUNTRY_NAME_COLUMN, "")) or "").strip()
+            subregion = (str(row_dict.get(SUBREGION_NAME_COLUMN,"")) or "").strip()
 
-        logger.info("Processing city: %s, %s, %s (%s)", city, subregion, region, country)
+            logger.info("Processing city: %s, %s, %s (%s)", city, subregion, region, country)
 
-        # Gather Stage-1 links
-        pdf_links = [row_dict.get(f"pdf_link{i}") for i in range(1, MAX_PDF_RESULTS + 1)]
-        page_links = [row_dict.get(f"page_link{i}") for i in range(1, MAX_PAGE_RESULTS + 1)]
+            # Gather Stage-1 links
+            pdf_links = [row_dict.get(f"pdf_link{i}") for i in range(1, MAX_PDF_RESULTS + 1)]
+            page_links = [row_dict.get(f"page_link{i}") for i in range(1, MAX_PAGE_RESULTS + 1)]
 
-        initial_pdf_links = [u for u in pdf_links if isinstance(u, str) and u]
-        initial_page_links = [u for u in page_links if isinstance(u, str) and u]
+            initial_pdf_links = [u for u in pdf_links if isinstance(u, str) and u]
+            initial_page_links = [u for u in page_links if isinstance(u, str) and u]
 
-        found_files: List[str] = []
+            found_files: List[str] = []
 
-        # --- Part 1: initial PDF links
-        for link in initial_pdf_links:
-            if link in visited_urls:
-                continue
-            visited_urls.add(link)
-
-            status, saved_path, meta = check_and_save_pdf(
-                link,
-                city,
-                country,
-                client=client,
-                temp_dir=TEMP_PDF_DIR,
-                confirmed_dir=CONFIRMED_PDF_DIR,
-                min_year=MIN_ACCEPTABLE_REPORT_YEAR,
-            )
-
-            if status == "saved" and saved_path:
-                found_files.append(saved_path)
-                results.append(
-                    {
-                        CITY_NAME_COLUMN: city,
-                        REGION_NAME_COLUMN: region,
-                        SUBREGION_NAME_COLUMN: subregion,
-                        COUNTRY_NAME_COLUMN: country,
-                        "Filename": os.path.basename(saved_path),
-                        "Canonical Type": meta.get("canonical_type") or "",
-                        "Language": (meta.get("language") or "unknown"),
-                        "Year": meta.get("final_year") or "",
-                        "Save Date": meta.get("save_date") or _dt.date.today().isoformat(),
-                    }
-                )
-            elif status == "download_failed":
-                failed_download_rows.append(
-                    {
-                        "City": city,
-                        "Country": country,
-                        "Failed_Link": link,
-                        "Reason": "Initial PDF download failed",
-                    }
-                )
-            elif status == "type_mismatch":
-                type_mismatch_rows.append(
-                    {
-                        "City": city,
-                        "Country": country,
-                        "PDF_Link": link,
-                        "AI_Report_Type": meta.get("ai_report_type"),
-                        "AI_Year_Raw": meta.get("ai_year_raw"),
-                        "Final_Year_Used": meta.get("final_year"),
-                        "Reason": "Relevant by AI, but type not in ACCEPTABLE_REPORT_TYPES",
-                    }
-                )
-            else:
-                # irrelevant / too_old / classification_failed -> no row
-                pass
-
-        # --- Part 2: page links (optional)
-        should_process_pages = (STAGE2_PAGE_PROCESSING_CONFIG == "process_all") or (
-            STAGE2_PAGE_PROCESSING_CONFIG == "process_if_no_pdfs" and not found_files
-        )
-
-        if should_process_pages and initial_page_links:
-            # Identify likely official pages (heuristic)
-            official_candidates = _filter_official_links(initial_page_links, city)
-
-            # Bound per-domain and overall
-            limited_pages = select_top_links(
-                official_candidates,
-                city=city,
-                top_k_per_domain=TOP_K_PAGES_PER_DOMAIN,
-                max_total=MAX_PAGES_TOTAL,
-                min_year=MIN_ACCEPTABLE_REPORT_YEAR,
-            )
-            official_pages: List[str] = [
-                item["url"] if isinstance(item, dict) else item for item in limited_pages
-            ]
-
-            # Scrape those pages for PDFs
-            scraped_pdf_links: List[str] = []
-            for official_url in official_pages:
-                if official_url in visited_urls:
+            # --- Part 1: initial PDF links
+            for link in initial_pdf_links:
+                if link in visited_urls:
                     continue
-                scraped = scrape_report_page_for_pdfs(
-                    official_url,
-                    city_name_for_filename=city,
-                    country=country,
-                    visited=visited_urls,
-                )
-                scraped_pdf_links.extend(scraped)
-
-            # Remove dupes / already visited
-            scraped_pdf_links = [u for u in scraped_pdf_links if u not in visited_urls]
-
-            # Limit & prioritize PDF candidates before downloading
-            selected_candidates = select_top_links(
-                scraped_pdf_links,
-                city=city,
-                top_k_per_domain=TOP_K_PDFS_PER_DOMAIN,
-                max_total=MAX_PDFS_TOTAL,
-                min_year=MIN_ACCEPTABLE_REPORT_YEAR,
-            )
-
-            for item in selected_candidates:
-                pdf_url = item["url"] if isinstance(item, dict) else item
-                if pdf_url in visited_urls:
-                    continue
-                visited_urls.add(pdf_url)
+                visited_urls.add(link)
 
                 status, saved_path, meta = check_and_save_pdf(
-                    pdf_url,
+                    link,
                     city,
                     country,
                     client=client,
@@ -396,7 +295,9 @@ def run_scraper_from_df(
                     results.append(
                         {
                             CITY_NAME_COLUMN: city,
-                            COUNTRY_COLUMN: country,
+                            REGION_NAME_COLUMN: region,
+                            SUBREGION_NAME_COLUMN: subregion,
+                            COUNTRY_NAME_COLUMN: country,
                             "Filename": os.path.basename(saved_path),
                             "Canonical Type": meta.get("canonical_type") or "",
                             "Language": (meta.get("language") or "unknown"),
@@ -409,8 +310,8 @@ def run_scraper_from_df(
                         {
                             "City": city,
                             "Country": country,
-                            "Failed_Link": pdf_url,
-                            "Reason": "Scraped PDF download failed",
+                            "Failed_Link": link,
+                            "Reason": "Initial PDF download failed",
                         }
                     )
                 elif status == "type_mismatch":
@@ -418,7 +319,7 @@ def run_scraper_from_df(
                         {
                             "City": city,
                             "Country": country,
-                            "PDF_Link": pdf_url,
+                            "PDF_Link": link,
                             "AI_Report_Type": meta.get("ai_report_type"),
                             "AI_Year_Raw": meta.get("ai_year_raw"),
                             "Final_Year_Used": meta.get("final_year"),
@@ -428,6 +329,110 @@ def run_scraper_from_df(
                 else:
                     # irrelevant / too_old / classification_failed -> no row
                     pass
+
+            # --- Part 2: page links (optional)
+            should_process_pages = (STAGE2_PAGE_PROCESSING_CONFIG == "process_all") or (
+                STAGE2_PAGE_PROCESSING_CONFIG == "process_if_no_pdfs" and not found_files
+            )
+
+            if should_process_pages and initial_page_links:
+                # Identify likely official pages (heuristic)
+                official_candidates = _filter_official_links(initial_page_links, city)
+
+                # Bound per-domain and overall
+                limited_pages = select_top_links(
+                    official_candidates,
+                    city=city,
+                    top_k_per_domain=TOP_K_PAGES_PER_DOMAIN,
+                    max_total=MAX_PAGES_TOTAL,
+                    min_year=MIN_ACCEPTABLE_REPORT_YEAR,
+                )
+                official_pages: List[str] = [
+                    item["url"] if isinstance(item, dict) else item for item in limited_pages
+                ]
+
+                # Scrape those pages for PDFs
+                scraped_pdf_links: List[str] = []
+                for official_url in official_pages:
+                    if official_url in visited_urls:
+                        continue
+                    scraped = scrape_report_page_for_pdfs(
+                        official_url,
+                        city_name_for_filename=city,
+                        country=country,
+                        visited=visited_urls,
+                    )
+                    scraped_pdf_links.extend(scraped)
+
+                # Remove dupes / already visited
+                scraped_pdf_links = [u for u in scraped_pdf_links if u not in visited_urls]
+
+                # Limit & prioritize PDF candidates before downloading
+                selected_candidates = select_top_links(
+                    scraped_pdf_links,
+                    city=city,
+                    top_k_per_domain=TOP_K_PDFS_PER_DOMAIN,
+                    max_total=MAX_PDFS_TOTAL,
+                    min_year=MIN_ACCEPTABLE_REPORT_YEAR,
+                )
+
+                for item in selected_candidates:
+                    pdf_url = item["url"] if isinstance(item, dict) else item
+                    if pdf_url in visited_urls:
+                        continue
+                    visited_urls.add(pdf_url)
+
+                    status, saved_path, meta = check_and_save_pdf(
+                        pdf_url,
+                        city,
+                        country,
+                        client=client,
+                        temp_dir=TEMP_PDF_DIR,
+                        confirmed_dir=CONFIRMED_PDF_DIR,
+                        min_year=MIN_ACCEPTABLE_REPORT_YEAR,
+                    )
+
+                    if status == "saved" and saved_path:
+                        found_files.append(saved_path)
+                        results.append(
+                            {
+                                CITY_NAME_COLUMN: city,
+                                COUNTRY_NAME_COLUMN: country,
+                                "Filename": os.path.basename(saved_path),
+                                "Canonical Type": meta.get("canonical_type") or "",
+                                "Language": (meta.get("language") or "unknown"),
+                                "Year": meta.get("final_year") or "",
+                                "Save Date": meta.get("save_date") or _dt.date.today().isoformat(),
+                            }
+                        )
+                    elif status == "download_failed":
+                        failed_download_rows.append(
+                            {
+                                "City": city,
+                                "Country": country,
+                                "Failed_Link": pdf_url,
+                                "Reason": "Scraped PDF download failed",
+                            }
+                        )
+                    elif status == "type_mismatch":
+                        type_mismatch_rows.append(
+                            {
+                                "City": city,
+                                "Country": country,
+                                "PDF_Link": pdf_url,
+                                "AI_Report_Type": meta.get("ai_report_type"),
+                                "AI_Year_Raw": meta.get("ai_year_raw"),
+                                "Final_Year_Used": meta.get("final_year"),
+                                "Reason": "Relevant by AI, but type not in ACCEPTABLE_REPORT_TYPES",
+                            }
+                        )
+                    else:
+                        # irrelevant / too_old / classification_failed -> no row
+                        pass
+        except Exception as e:
+            logger.error("Error processing city '%s' (%s): %s", city if 'city' in locals() else "unknown", country if 'country' in locals() else "unknown", e, exc_info=True)
+            continue
+
 
     # Return dataframes with explicit column order
     results_df = pd.DataFrame(

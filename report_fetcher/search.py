@@ -822,25 +822,25 @@ def process_companies_for_reports(
     )
 
     for row in iterator:
-        row_dict = row._asdict() if hasattr(row, "_asdict") else dict(zip(out_df.columns, row))
-        row_dict = {
-            k: v
-            for k, v in row_dict.items()
-            if not (v is None or (isinstance(v, float) and math.isnan(v)))
-        }
-
-        city_name = (row_dict.get(CITY_NAME_COLUMN) or "").strip()
-        region_name = (row_dict.get(REGION_NAME_COLUMN) or "").strip()
-        subregion_name = (row_dict.get(SUBREGION_NAME_COLUMN) or "").strip()
-        country_name = (row_dict.get(COUNTRY_NAME_COLUMN) or "").strip()
-
-        if not city_name:
-            logger.warning("Skipping row with missing city name.")
-            pdf_rows.append([None] * MAX_PDF_RESULTS)
-            page_rows.append([None] * MAX_PAGE_RESULTS)
-            continue
-
         try:
+            row_dict = row._asdict() if hasattr(row, "_asdict") else dict(zip(out_df.columns, row))
+            row_dict = {
+                k: v
+                for k, v in row_dict.items()
+                if not (v is None or (isinstance(v, float) and math.isnan(v)))
+            }
+
+            city_name = (row_dict.get(CITY_NAME_COLUMN) or "").strip()
+            region_name = (row_dict.get(REGION_NAME_COLUMN) or "").strip()
+            subregion_name = (row_dict.get(SUBREGION_NAME_COLUMN) or "").strip()
+            country_name = (row_dict.get(COUNTRY_NAME_COLUMN) or "").strip()
+
+            if not city_name:
+                logger.warning("Skipping row with missing city name.")
+                pdf_rows.append([None] * MAX_PDF_RESULTS)
+                page_rows.append([None] * MAX_PAGE_RESULTS)
+                continue
+
             pdf_links, page_links = find_report_links_categorized(
                 city_name=city_name,
                 api_key=api_key,
@@ -858,12 +858,13 @@ def process_companies_for_reports(
             page_links = list(page_links)[:MAX_PAGE_RESULTS] if page_links else []
 
         except Exception as e:
-            logger.exception("Error fetching links for '%s' (%s): %s", city_name, country_name, e)
+            logger.exception("Error processing city '%s' (%s): %s", city_name if 'city_name' in locals() else "unknown", country_name if 'country_name' in locals() else "unknown", e)
             pdf_links, page_links = [], []
 
         # Pad to fixed length
         pdf_rows.append(pdf_links + [None] * (MAX_PDF_RESULTS - len(pdf_links)))
         page_rows.append(page_links + [None] * (MAX_PAGE_RESULTS - len(page_links)))
+
 
     # assign columns
     pdf_cols = [f"pdf_link{i}" for i in range(1, MAX_PDF_RESULTS + 1)]
@@ -908,17 +909,17 @@ def process_companies_for_fallback_reports(
 
     with tqdm(total=out_df.shape[0], desc="Fallback: finding report links") as pbar:
         for _, row in out_df.iterrows():
-            search_dict = (
-                row._asdict() if hasattr(row, "_asdict") else dict(zip(out_df.columns, row))
-            )
-            search_dict = {key: search_dict[key] for key in COLUMNS}
-            # pprint(search_dict)
-            # input()
-
-            city_name = (row.get(CITY_NAME_COLUMN) or "").strip()
-            city_country = (row.get(COUNTRY_NAME_COLUMN) or "").strip()
-
             try:
+                search_dict = (
+                    row._asdict() if hasattr(row, "_asdict") else dict(zip(out_df.columns, row))
+                )
+                search_dict = {key: search_dict[key] for key in COLUMNS}
+                # pprint(search_dict)
+                # input()
+
+                city_name = (row.get(CITY_NAME_COLUMN) or "").strip()
+                city_country = (row.get(COUNTRY_NAME_COLUMN) or "").strip()
+
                 pdf_links, page_links = find_report_links_fallback(
                     city_name=city_name,
                     api_key=scaleserp_api_key,
@@ -931,7 +932,7 @@ def process_companies_for_fallback_reports(
                 pdf_links = list(pdf_links)[:max_pdf_results] if pdf_links else []
                 page_links = list(page_links)[:max_page_results] if page_links else []
             except Exception as e:
-                logger.warning("[Fallback] Error for '%s': %s", city_name, e)
+                logger.warning("[Fallback] Error for '%s': %s", city_name if 'city_name' in locals() else "unknown", e)
                 pdf_links, page_links = [], []
 
             # pad to fixed length
@@ -939,6 +940,7 @@ def process_companies_for_fallback_reports(
             all_page_rows.append(page_links + [None] * (max_page_results - len(page_links)))
 
             pbar.update(1)
+
 
     pdf_cols = [f"pdf_link{i}" for i in range(1, max_pdf_results + 1)]
     page_cols = [f"page_link{i}" for i in range(1, max_page_results + 1)]

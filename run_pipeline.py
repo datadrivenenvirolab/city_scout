@@ -82,13 +82,16 @@ def setup_logging(verbosity: int) -> None:
         format="%(asctime)s %(levelname)s %(pathname)s, line %(lineno)d, in %(funcName)s: %(message)s",
     )
 
-# raise 
+
+# raise
 def load_input(csv_path: Optional[str]) -> pd.DataFrame:
     if csv_path:
         p = Path(csv_path)
         if not p.exists():
             raise FileNotFoundError(f"Input file not found: {p}")
         return pd.read_csv(p)
+    else:
+        raise ValueError("No input CSV provided.")
 
     # Fallback tiny sample if no CSV given
     # return pd.DataFrame(
