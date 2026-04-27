@@ -222,12 +222,12 @@ def run_scraper_from_df(
         failed_df: rows for download failures
         mismatch_df: rows for relevant-but-non-accepted type
     """
-    target_cols = COLUMNS + ["Filename", "Canonical Type", "Language", "Year", "Save Date"]
+    target_cols = COLUMNS + ["Filename", "Canonical Type", "Language", "Year", "Save Date", "PDF URL", "AI_Reasoning", "LLM Response"]
 
     if dataframe is None or dataframe.empty:
         return (
             pd.DataFrame(columns=target_cols),
-            pd.DataFrame(columns=["City", "Country", "Failed_Link", "Reason"]),
+            pd.DataFrame(columns=["City", "Country", "Failed_Link", "Reason", "AI_Reasoning", "LLM Response"]),
             pd.DataFrame(
                 columns=[
                     "City",
@@ -237,6 +237,8 @@ def run_scraper_from_df(
                     "AI_Year_Raw",
                     "Final_Year_Used",
                     "Reason",
+                    "AI_Reasoning",
+                    "LLM Response",
                 ]
             ),
         )
@@ -303,6 +305,9 @@ def run_scraper_from_df(
                             "Language": (meta.get("language") or "unknown"),
                             "Year": meta.get("final_year") or "",
                             "Save Date": meta.get("save_date") or _dt.date.today().isoformat(),
+                            "PDF URL": meta.get("url") or "",
+                            "AI_Reasoning": meta.get("ai_reasoning") or "",
+                            "LLM Response": meta.get("llm_response") or "",
                         }
                     )
                 elif status == "download_failed":
@@ -312,6 +317,8 @@ def run_scraper_from_df(
                             "Country": country,
                             "Failed_Link": link,
                             "Reason": "Initial PDF download failed",
+                            "AI_Reasoning": meta.get("ai_reasoning") or "",
+                            "LLM Response": meta.get("llm_response") or "",
                         }
                     )
                 elif status == "type_mismatch":
@@ -324,11 +331,26 @@ def run_scraper_from_df(
                             "AI_Year_Raw": meta.get("ai_year_raw"),
                             "Final_Year_Used": meta.get("final_year"),
                             "Reason": "Relevant by AI, but type not in ACCEPTABLE_REPORT_TYPES",
+                            "AI_Reasoning": meta.get("ai_reasoning") or "",
+                            "LLM Response": meta.get("llm_response") or "",
                         }
                     )
+                elif status == "irrelevant":
+                    failed_download_rows.append(
+                        {"City": city, "Country": country, "Failed_Link": link, "Reason": "Irrelevant by AI", "AI_Reasoning": meta.get("ai_reasoning") or "", "LLM Response": meta.get("llm_response") or ""}
+                    )
+                elif status == "too_old":
+                    failed_download_rows.append(
+                        {"City": city, "Country": country, "Failed_Link": link, "Reason": "Report too old", "AI_Reasoning": meta.get("ai_reasoning") or "", "LLM Response": meta.get("llm_response") or ""}
+                    )
+                elif status == "classification_failed":
+                    failed_download_rows.append(
+                        {"City": city, "Country": country, "Failed_Link": link, "Reason": "Classification failed", "AI_Reasoning": meta.get("ai_reasoning") or "", "LLM Response": meta.get("llm_response") or ""}
+                    )
                 else:
-                    # irrelevant / too_old / classification_failed -> no row
-                    pass
+                    failed_download_rows.append(
+                        {"City": city, "Country": country, "Failed_Link": link, "Reason": f"Unknown status: {status}", "AI_Reasoning": meta.get("ai_reasoning") or "", "LLM Response": meta.get("llm_response") or ""}
+                    )
 
             # --- Part 2: page links (optional)
             should_process_pages = (STAGE2_PAGE_PROCESSING_CONFIG == "process_all") or (
@@ -403,6 +425,9 @@ def run_scraper_from_df(
                                 "Language": (meta.get("language") or "unknown"),
                                 "Year": meta.get("final_year") or "",
                                 "Save Date": meta.get("save_date") or _dt.date.today().isoformat(),
+                                "PDF URL": meta.get("url") or "",
+                                "AI_Reasoning": meta.get("ai_reasoning") or "",
+                                "LLM Response": meta.get("llm_response") or "",
                             }
                         )
                     elif status == "download_failed":
@@ -412,6 +437,8 @@ def run_scraper_from_df(
                                 "Country": country,
                                 "Failed_Link": pdf_url,
                                 "Reason": "Scraped PDF download failed",
+                                "AI_Reasoning": meta.get("ai_reasoning") or "",
+                                "LLM Response": meta.get("llm_response") or "",
                             }
                         )
                     elif status == "type_mismatch":
@@ -424,11 +451,26 @@ def run_scraper_from_df(
                                 "AI_Year_Raw": meta.get("ai_year_raw"),
                                 "Final_Year_Used": meta.get("final_year"),
                                 "Reason": "Relevant by AI, but type not in ACCEPTABLE_REPORT_TYPES",
+                                "AI_Reasoning": meta.get("ai_reasoning") or "",
+                                "LLM Response": meta.get("llm_response") or "",
                             }
                         )
+                    elif status == "irrelevant":
+                        failed_download_rows.append(
+                            {"City": city, "Country": country, "Failed_Link": pdf_url, "Reason": "Irrelevant by AI", "AI_Reasoning": meta.get("ai_reasoning") or "", "LLM Response": meta.get("llm_response") or ""}
+                        )
+                    elif status == "too_old":
+                        failed_download_rows.append(
+                            {"City": city, "Country": country, "Failed_Link": pdf_url, "Reason": "Report too old", "AI_Reasoning": meta.get("ai_reasoning") or "", "LLM Response": meta.get("llm_response") or ""}
+                        )
+                    elif status == "classification_failed":
+                        failed_download_rows.append(
+                            {"City": city, "Country": country, "Failed_Link": pdf_url, "Reason": "Classification failed", "AI_Reasoning": meta.get("ai_reasoning") or "", "LLM Response": meta.get("llm_response") or ""}
+                        )
                     else:
-                        # irrelevant / too_old / classification_failed -> no row
-                        pass
+                        failed_download_rows.append(
+                            {"City": city, "Country": country, "Failed_Link": pdf_url, "Reason": f"Unknown status: {status}", "AI_Reasoning": meta.get("ai_reasoning") or "", "LLM Response": meta.get("llm_response") or ""}
+                        )
         except Exception as e:
             logger.error("Error processing city '%s' (%s): %s", city if 'city' in locals() else "unknown", country if 'country' in locals() else "unknown", e, exc_info=True)
             continue
@@ -437,7 +479,7 @@ def run_scraper_from_df(
     # Return dataframes with explicit column order
     results_df = pd.DataFrame(
         results,
-        columns=COLUMNS + ["Filename", "Canonical Type", "Language", "Year", "Save Date"],
+        columns=COLUMNS + ["Filename", "Canonical Type", "Language", "Year", "Save Date", "PDF URL", "AI_Reasoning", "LLM Response"],
     )
     failed_df = pd.DataFrame(failed_download_rows)
     mismatch_df = pd.DataFrame(type_mismatch_rows)

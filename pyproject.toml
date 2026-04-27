@@ -22,3 +22,20 @@ exclude = '''
 profile = "black"
 extend_skip = ["report_fetcher_env/*","report_fetcher_env"]
 skip_glob = ["**/*.!(py)"]
+
+[tool.ty.src]
+exclude = [
+    ".venv/*",
+    ".venv",
+    "report_fetcher_env/*",
+    "report_fetcher_env",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+]
+
+[dependency-groups]
+dev = [
+    "ty>=0.0.29",
+]

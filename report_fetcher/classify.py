@@ -35,7 +35,7 @@ def is_relevant_pdf(
     province: str = "a province",
     model: str = OPENAI_MODEL,
     max_chars: int = 6000,
-) -> tuple[bool, str, str, str]:
+) -> tuple[bool, str, str, str, str, str]:
     """
     Ask the LLM to classify a PDF excerpt.
 
@@ -45,10 +45,11 @@ def is_relevant_pdf(
         - report_type is the raw type extracted from the LLM response (not canonicalized).
         - year is a 4-digit year or 'unknown year'.
         - language is the 2-letter ISO 639-1 code for the document's language.
+        - raw_response is the exact text returned by the LLM.
     """
     if not text or len(text.strip()) < 50:
         logger.warning("is_relevant_pdf: empty or too-short text (len=%s)", len(text or ""))
-        return False, "unknown_type", "unknown year", "unknown"
+        return False, "unknown_type", "unknown year", "unknown", "", ""
 
     excerpt = text[:max_chars]
     logger.debug(
@@ -69,23 +70,23 @@ def is_relevant_pdf(
             model=model,
             input=(
                 "Respond ONLY in this exact format on one line: "
-                "Relevance: <Yes/No>, CorrectCity: <Yes/No>, ReportType: <Type>, Year: <Year>, Language: <xx>\n\n"
-                + prompt
+                "Relevance: <Yes/No>, CorrectCity: <Yes/No>, ReportType: <Type>, Year: <Year>, Language: <xx>, Reasoning: <Brief explanation>\n\n"
+                + prompt.format(excerpt=excerpt, city_name=city_name, province=province, country=country)
             ),
             reasoning={"effort": config.get("reasoning_effort", "minimal")},
             text={"verbosity": config.get("text_verbosity", "low")},
-            temperature=config.get("temperature", 0.0),
             max_output_tokens=config.get("max_output_tokens", 64),
         )
         raw = (getattr(resp, "output_text", None) or "").strip()
         logger.info("LLM classification raw: %s", raw)
+        print(f"\n[LLM RESPONSE] {raw}\n")
     except Exception as e:
         logger.error("OpenAI classification call failed: %s", e, exc_info=True)
-        return False, "openai_error", "unknown year", "unknown"
+        return False, "openai_error", "unknown year", "unknown", "", ""
 
     if not raw:
         logger.warning("LLM returned empty output_text.")
-        return False, "parse_error", "unknown year", "unknown"
+        return False, "parse_error", "unknown year", "unknown", "", ""
     # raise "dadum"
     logger.debug("LLM raw line: %r", raw)
 
@@ -113,13 +114,16 @@ def is_relevant_pdf(
     m_lang = re.search(r"\blanguage\s*:\s*([a-z]{2})\b", s)
     lang = m_lang.group(1) if m_lang else "unknown"
 
+    m_reasoning = re.search(r"reasoning:\s*(.+)$", raw, flags=re.I | re.S)
+    reasoning = m_reasoning.group(1).strip() if m_reasoning else ""
+
     if not (m_type and m_year):
         logger.warning(
             "LLM parse issue. raw=%r | parsed_type=%r parsed_year=%r", raw, report_type, year
         )
 
     final_relevance = bool(relevance and correct_city)
-    return final_relevance, report_type, year, lang
+    return final_relevance, report_type, year, lang, reasoning, raw
 
 
 def pick_canonical_report_type_strict(ai_report_type: str) -> Optional[str]:

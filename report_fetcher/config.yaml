@@ -2,19 +2,24 @@ llm_config:
   # The identifier of the LLM model to use for classification (e.g., GPT-4o, GPT-3.5-turbo).
   model: "gpt-5-mini"
 
-  # Controls randomness: 0.0 is deterministic, 1.0 is creative. 0.0 is recommended for classification.
-  temperature: 0.0
-
-  # The maximum length of the model's response in tokens.
-  max_output_tokens: 64
+  # The maximum length of the model's response in tokens (including reasoning tokens).
+  max_output_tokens: 4096
 
   # Specific to some models: controls the amount of 'thinking' or reasoning steps (e.g., "minimal", "medium", "high").
-  # reasoning_effort: "minimal"
-  # reasoning_effort: "medium"
   reasoning_effort: "high"
+  # reasoning_effort: "medium"
+  # reasoning_effort: "minimal"
 
   # Controls how much detail the model provides in its internal text processing (e.g., "low", "high").
-  text_verbosity: "low"
+  text_verbosity: "high"
+
+networking:
+  # Maximum duration (in seconds) to wait for a PDF to download.
+  pdf_download_timeout: 0
+  # If true, skip downloading files that already exist in the temp directory.
+  use_download_cache: true
+  # If false, prevent downloading any new files. Useful for testing pipelines locally.
+  allow_new_downloads: false
 
   # The API endpoint for the LLM service. Defaults to OpenAI if commented out.
   # endpoint: "https://api.openai.com/v1"

@@ -7,12 +7,11 @@ from datetime import datetime
 import os
 from pathlib import Path
 
-# === Paths ===
-BASE_DIR = Path.cwd() / "outputs"
+# === API / Model Settings ===
+from .prompt_loader import get_llm_config, get_config_section
 
-# basedir = basedir + datetime .now().strftime("%Y-%m-%d_%H-%M-%S")
-
-# BASE_DIR = Path.cwd() / "outputs"
+paths_cfg = get_config_section("paths")
+BASE_DIR = Path.cwd() / paths_cfg.get("base_output_dir", "outputs")
 
 DATE_TIME = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -27,16 +26,14 @@ except Exception as e:
     print(f"Error accessing SLURM environment variables: {e}")
     BASE_DIR = BASE_DIR / f"run_{DATE_TIME}"
 
-PDF_DIR = BASE_DIR / "pdfs"
-HTML_DIR = BASE_DIR / "html"
-TEMP_PDF_DIR = BASE_DIR / "tmp_pdfs"
+PDF_DIR = BASE_DIR / paths_cfg.get("pdfs_subdir", "pdfs")
+HTML_DIR = BASE_DIR / paths_cfg.get("html_subdir", "html")
+TEMP_PDF_DIR = BASE_DIR / paths_cfg.get("tmp_pdfs_subdir", "tmp_pdfs")
 CONFIRMED_PDF_DIR = PDF_DIR
 
 for p in (BASE_DIR, PDF_DIR, HTML_DIR, TEMP_PDF_DIR):
     p.mkdir(parents=True, exist_ok=True)
 
-# === API / Model Settings ===
-from .prompt_loader import get_llm_config
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 SCALESERP_API_KEY = os.getenv("SCALESERP_API_KEY", "")
 OPENAI_MODEL = get_llm_config().get("model", "gpt-5-mini")
@@ -95,8 +92,10 @@ ACCEPTABLE_REPORT_TYPES = [
 ACCEPTABLE_REPORT_TYPES_LOWER = [t.lower() for t in ACCEPTABLE_REPORT_TYPES]
 
 # === Networking / Download Settings ===
-PDF_DOWNLOAD_TIMEOUT_SECONDS = 30
-PDF_DOWNLOAD_TIMEOUT_SECONDS = 5
+net_cfg = get_config_section("networking")
+PDF_DOWNLOAD_TIMEOUT_SECONDS = net_cfg.get("pdf_download_timeout", 30)
+USE_DOWNLOAD_CACHE = net_cfg.get("use_download_cache", True)
+ALLOW_NEW_DOWNLOADS = net_cfg.get("allow_new_downloads", True)
 TRACKING_PARAMS = {
     "utm_source",
     "utm_medium",
@@ -110,10 +109,11 @@ TRACKING_PARAMS = {
 }
 
 # === Stage 1 Search Settings ===
-MAX_PDF_RESULTS = 10
-MAX_PAGE_RESULTS = 10
-SEARCH_LANGUAGE_PRIORITY = "native"  # or "english"
-STAGE1_SCORING_ENABLED = True
+search_cfg = get_config_section("search_settings")
+MAX_PDF_RESULTS = search_cfg.get("max_pdf_results", 10)
+MAX_PAGE_RESULTS = search_cfg.get("max_page_results", 10)
+SEARCH_LANGUAGE_PRIORITY = search_cfg.get("search_language_priority", "native")
+STAGE1_SCORING_ENABLED = search_cfg.get("stage1_scoring_enabled", True)
 
 CITY_NAME_COLUMN = "City"
 # ASSOCIATION_NAME_COLUMN = "Association"
@@ -193,15 +193,12 @@ MAX_PDFS_TOTAL = 30
 ENGLISH_SPEAKING_COUNTRIES = ["USA", "GBR", "CAN", "AUS", "NZL", "IRL"]
 
 # Search Cache
-SEARCH_CACHE_FILE = "search_cache.json"
+SEARCH_CACHE_FILE = search_cfg.get("search_cache_file", "search_cache.json")
 
 # Use Duck Duck Go instead?
-USE_DDGS = False
-# USE_DDGS = True
+USE_DDGS = search_cfg.get("use_ddgs", False)
 
+# Enable or Disable Search Caching
+USE_SEARCH_CACHE = search_cfg.get("use_search_cache", True)
 
-# Enable or Disable Search Caching, No time limit for expiring cache yet. Mainly for testing PDF identification stuff to keep search results consistent. Could add a time limit for expiry in the future.
-USE_SEARCH_CACHE = False
-# USE_SEARCH_CACHE = True
-
-MAX_QUERY_WORDS = 32  # Google search seems to have a 32 word limit from what I checked. So limiting queries to 32 Words.
+MAX_QUERY_WORDS = search_cfg.get("max_query_words", 32)

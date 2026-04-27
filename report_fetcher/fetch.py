@@ -11,11 +11,14 @@ from typing import Optional
 from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
 
 import requests
+import requests.compat
 from bs4 import BeautifulSoup
 
 from .config import (
+    ALLOW_NEW_DOWNLOADS,
     PDF_DOWNLOAD_TIMEOUT_SECONDS,
     TRACKING_PARAMS,
+    USE_DOWNLOAD_CACHE,
 )
 
 logger = logging.getLogger(__name__)
@@ -106,6 +109,16 @@ def download_pdf(
     pdf_headers, html_headers = build_headers(ua)
 
     try:
+        # --- Cache Check ---
+        if USE_DOWNLOAD_CACHE and save_path.exists() and save_path.stat().st_size > 1000:
+            logger.info("PDF already exists in cache, skipping download: %s", save_path)
+            return True
+
+        # --- New Download Check ---
+        if not ALLOW_NEW_DOWNLOADS:
+            logger.info("New downloads disabled via config, skipping: %s", url)
+            return False
+
         # Normalize URL and derive related endpoints
         clean_url = _strip_tracking_params(url)
         p = urlparse(clean_url)
@@ -114,13 +127,19 @@ def download_pdf(
         dir_url = clean_url.rsplit("/", 1)[0] + "/"
         listing_url = f"{origin}/csrreports/"  # harmless if 404
 
+        part_path = save_path.with_suffix(save_path.suffix + ".part")
+
+        def finalize_download(content: bytes):
+            part_path.write_bytes(content)
+            part_path.replace(save_path)
+
         # --- Attempt 1: direct fetch ---
         logger.info("Download attempt 1 (direct): %s", clean_url)
         hdrs = with_headers(pdf_headers, Range="bytes=0-")
         r = sess.get(clean_url, headers=hdrs, timeout=timeout, allow_redirects=True, verify=True)
 
         if r.ok and _is_pdf_response(r):
-            save_path.write_bytes(r.content)
+            finalize_download(r.content)
             logger.info("Downloaded PDF (direct): %s -> %s", clean_url, save_path)
             return True
         else:
@@ -153,7 +172,7 @@ def download_pdf(
                         pdf_url, headers=hdrs2, timeout=timeout, allow_redirects=True, verify=True
                     )
                     if pdf_resp.ok and _is_pdf_response(pdf_resp):
-                        save_path.write_bytes(pdf_resp.content)
+                        finalize_download(pdf_resp.content)
                         logger.info("Downloaded PDF (parsed link): %s -> %s", pdf_url, save_path)
                         return True
                     else:
@@ -182,7 +201,7 @@ def download_pdf(
         logger.info("Retry after warm-up: %s", clean_url)
         r2 = sess.get(clean_url, headers=hdrs3, timeout=timeout, allow_redirects=True, verify=True)
         if r2.ok and _is_pdf_response(r2):
-            save_path.write_bytes(r2.content)
+            finalize_download(r2.content)
             logger.info("Downloaded PDF (after warm-up): %s -> %s", clean_url, save_path)
             return True
 
@@ -248,7 +267,7 @@ def scrape_report_page_for_pdfs(
             return []
 
         soup = BeautifulSoup(r.content, "html.parser")
-        all_links = [a.get("href") for a in soup.find_all("a", href=True)]
+        all_links = [str(a.get("href")) for a in soup.find_all("a", href=True)]
 
         for link in all_links:
             full_url = urljoin(url, link)
@@ -304,7 +323,7 @@ def _find_pdf_link_in_html(html: str, base_url: str) -> str | None:
 
     # Anchors
     for a in soup.find_all("a", href=True):
-        href = a["href"]
+        href = str(a["href"])
         txt = (a.get_text() or "").lower()
         if ".pdf" in href.lower() or "download" in txt:
             return requests.compat.urljoin(base_url, href)
@@ -312,9 +331,10 @@ def _find_pdf_link_in_html(html: str, base_url: str) -> str | None:
     # Embedded viewers
     for tag in soup.find_all(["iframe", "object", "embed"]):
         src = tag.get("src") or tag.get("data")
+        src = str(src)
         if not src:
             continue
-        if ".pdf" in src.lower() or "application/pdf" in (tag.get("type") or "").lower():
+        if ".pdf" in src.lower() or "application/pdf" in (str(tag.get("type")) or "").lower():
             return requests.compat.urljoin(base_url, src)
 
     # JSON-LD

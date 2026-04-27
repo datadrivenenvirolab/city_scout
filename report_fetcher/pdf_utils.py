@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Optional, Tuple
 from urllib.parse import urlparse
 
-import fitz  # PyMuPDF
+import pymupdf  # PyMuPDF
 import pandas as pd
 
 from .classify import is_relevant_pdf, pick_canonical_report_type_strict
@@ -48,7 +48,7 @@ def extract_text_from_pdf(pdf_path: str | Path, max_pages: int = 10) -> str:
     pdf_path = Path(pdf_path)
     text_chunks: list[str] = []
     try:
-        with fitz.open(pdf_path) as doc:
+        with pymupdf.open(pdf_path) as doc:
             n = min(max_pages, len(doc))
             for i in range(n):
                 page = doc[i]
@@ -81,15 +81,13 @@ def check_and_save_pdf(
             "url", "city", "country",
             "ai_report_type", "canonical_type",
             "ai_year_raw", "final_year",
-            "language", "save_date" (present only when status == "saved")
+            "language", "llm_response", "save_date" (present only when status == "saved")
           }
     """
     meta = {
         "url": pdf_url,
         "city": (
-            str(city_name_for_filename)
-            if pd.notna(city_name_for_filename)
-            else "UnknownCity"
+            str(city_name_for_filename) if pd.notna(city_name_for_filename) else "UnknownCity"
         ),
         "country": country,
         "ai_report_type": None,
@@ -97,10 +95,12 @@ def check_and_save_pdf(
         "ai_year_raw": None,
         "final_year": "unknown year",
         "language": "unknown",  # <- added
+        "ai_reasoning": None,
+        "llm_response": None,
         # "save_date" will be set only when actually saved
     }
 
-    city_name_str = meta["city"]
+    city_name_str = str(meta["city"])
     temp_dir = Path(temp_dir)
     temp_dir.mkdir(parents=True, exist_ok=True)
     confirmed_dir = Path(confirmed_dir)
@@ -116,11 +116,11 @@ def check_and_save_pdf(
     ok = download_pdf(pdf_url, save_path=temp_path)
     if not ok:
         logger.warning("Download failed or not a PDF: %s", pdf_url)
-        if temp_path.exists():
-            try:
-                temp_path.unlink()
-            except Exception as cleanup_e:
-                logger.debug("Cleanup error for %s: %s", temp_path, cleanup_e)
+        # if temp_path.exists():
+        #     try:
+        #         temp_path.unlink()
+        #     except Exception as cleanup_e:
+        #         logger.debug("Cleanup error for %s: %s", temp_path, cleanup_e)
         return ("download_failed", None, meta)
 
     # Extract text (first 15 pages)
@@ -134,14 +134,30 @@ def check_and_save_pdf(
         client=client,
     )
     try:
-        final_rel, report_type_from_ai, year_from_ai, lang_code = result  # new (4-tuple)
+        final_rel, report_type_from_ai, year_from_ai, lang_code, reasoning_from_ai, raw_resp = result
     except Exception:
-        final_rel, report_type_from_ai, year_from_ai = result  # backward-compat (3-tuple)
-        lang_code = "unknown"
+        if len(result) == 6:
+            final_rel, report_type_from_ai, year_from_ai, lang_code, reasoning_from_ai, raw_resp = result
+        elif len(result) == 5:
+            final_rel, report_type_from_ai, year_from_ai, lang_code, raw_resp = result
+            reasoning_from_ai = ""
+        elif len(result) == 4:
+            final_rel, report_type_from_ai, year_from_ai, lang_code = result
+            reasoning_from_ai = ""
+            raw_resp = ""
+        elif len(result) == 3:
+            final_rel, report_type_from_ai, year_from_ai = result
+            lang_code = "unknown"
+            reasoning_from_ai = ""
+            raw_resp = ""
+        else:
+            raise Exception("Unexpected result format from is_relevant_pdf")
 
     meta["ai_report_type"] = (report_type_from_ai or "").strip()
     meta["ai_year_raw"] = year_from_ai
     meta["language"] = (lang_code or "unknown").lower()
+    meta["ai_reasoning"] = reasoning_from_ai
+    meta["llm_response"] = raw_resp
 
     # --- Year handling ---
     final_year = "unknown year"
@@ -169,30 +185,30 @@ def check_and_save_pdf(
     # --- Decide outcomes ---
     if not final_rel:
         # irrelevant
-        try:
-            if temp_path.exists():
-                temp_path.unlink()
-        except Exception:
-            logger.debug("Failed to remove temp file %s", temp_path, exc_info=True)
+        # try:
+        #     if temp_path.exists():
+        #         temp_path.unlink()
+        # except Exception:
+        #     logger.debug("Failed to remove temp file %s", temp_path, exc_info=True)
         logger.info("Irrelevant by AI: %s", pdf_url)
         return ("irrelevant", None, meta)
 
     if too_old:
-        try:
-            if temp_path.exists():
-                temp_path.unlink()
-        except Exception:
-            logger.debug("Failed to remove temp file %s", temp_path, exc_info=True)
+        # try:
+        #     if temp_path.exists():
+        #         temp_path.unlink()
+        # except Exception:
+        #     logger.debug("Failed to remove temp file %s", temp_path, exc_info=True)
         logger.info("Report too old: %s", pdf_url)
         return ("too_old", None, meta)
     logger.info(canonical)
     if not canonical:
         # relevant but type not in accepted list
-        try:
-            if temp_path.exists():
-                temp_path.unlink()
-        except Exception:
-            logger.debug("Failed to remove temp file %s", temp_path, exc_info=True)
+        # try:
+        #     if temp_path.exists():
+        #         temp_path.unlink()
+        # except Exception:
+        #     logger.debug("Failed to remove temp file %s", temp_path, exc_info=True)
         logger.info(
             "[TYPE MISMATCH] Relevant but AI type '%s' not accepted.", meta["ai_report_type"]
         )
@@ -211,7 +227,9 @@ def check_and_save_pdf(
     # Resolve collisions
     counter = 1
     while confirmed_path.exists():
-        confirmed_filename = f"{safe_city}_{final_report_type_for_filename}_{final_year_for_filename}_{counter}.pdf"
+        confirmed_filename = (
+            f"{safe_city}_{final_report_type_for_filename}_{final_year_for_filename}_{counter}.pdf"
+        )
         confirmed_path = confirmed_dir / confirmed_filename
         counter += 1
 

@@ -14,25 +14,28 @@ country_province_names = None
 
 
 def load_province_names() -> dict:
+    global country_province_names
     PROVINCE_NAME_FILES = "countries_province_names.json"
     if not country_province_names:
         with open(PROVINCE_NAME_FILES, "r+", encoding="utf-8") as countries_json_file:
             country_province_names = json.load(countries_json_file)
 
-    return countries_json_file
+    # return countries_json_file
+    return country_province_names
 
 
 def read_regions_data() -> dict:
-    pass
+    return dict()
 
 
-def get_country_iso(country_name: str) -> str:
+def get_country_iso(country_name: str | None) -> str | None:
+    if not country_name:
+        return None
     cc = coco.CountryConverter()
 
     some_countries = [country_name]
-    
-    iso3_codes = cc.convert(names=some_countries, to='ISO3')      
 
+    iso3_codes = cc.convert(names=some_countries, to="ISO3")
 
     # print(iso3_codes)
     # exit()
@@ -55,7 +58,7 @@ def get_region_types_by_country_eng(country_name: str | None, country_iso: str |
     with open(ENTITIES_FILE_NAME, "r+", encoding="utf-8") as region_json_file:
         region_dict = json.load(region_json_file)
 
-    if not country_iso:
+    if not country_iso and country_name:
         country_iso = get_country_iso(country_name)
     regions_country_by_iso = region_dict[country_iso]
 
@@ -66,7 +69,9 @@ def get_region_types_by_country_eng(country_name: str | None, country_iso: str |
     return regions_eng
 
 
-def get_region_types_by_country(country_name: str | None = None, country_iso: str | None = None) -> list:
+def get_region_types_by_country(
+    country_name: str | None = None, country_iso: str | None = None
+) -> dict:
     # print("GT",country_name)
     logger.info("For " + str(country_name) + " " + str(country_iso))
     ENTITIES_FILE_NAME = "iso_entities.json"
@@ -83,25 +88,27 @@ def get_region_types_by_country(country_name: str | None = None, country_iso: st
 
     # pprint(region_dict.keys())
 
-
     regions_country_by_iso = region_dict[country_iso]
 
     # pprint(regions_country_by_iso)
 
     regions_eng = list()
+    regions_dict = dict()
     for region in regions_country_by_iso:
         regions_eng.append(region["ent_type_local"])
+        regions_dict[region["ent_type_local"]] = region["ent_type_eng"]
 
     # exit()
 
-    return regions_eng
+    # return regions_eng, regions_dict
+    return regions_dict
 
 
-def get_region_right_name() -> str:
+def get_region_right_name() -> str | None:
     pass
 
 
-def get_region_right_name_full() -> str:
+def get_region_right_name_full() -> str | None:
     pass
 
 
@@ -125,18 +132,20 @@ def fuzzy_match_names(name: str, list_to_match_from: list) -> str:
     # logging.info("")
     return best_match
 
+
 def get_address(search_dict):
     query_parts = []
     for key in search_dict.keys():
         val = search_dict.get(key)
         # print(type(val), val)
         if val and str(val).strip() != "":
-            query_parts.append(str(val) )
+            query_parts.append(str(val))
     geocoders.GoogleV3
     gn = geocoders.Nominatim(user_agent="report_fetcher")
     place, (lat, lng) = gn.geocode(" ".join(query_parts))
     # print(place)
     return place
+
 
 def print_to_logger(*varaible):
     # logger.info()
@@ -144,4 +153,3 @@ def print_to_logger(*varaible):
     #     logFile.write("\n".join([str(pformat(var)) for var in varaible]))
 
     return "\n".join([str(pformat(var)) for var in varaible])
-    
