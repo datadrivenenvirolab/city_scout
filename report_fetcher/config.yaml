@@ -15,11 +15,11 @@ llm_config:
 
 networking:
   # Maximum duration (in seconds) to wait for a PDF to download.
-  pdf_download_timeout: 0
+  pdf_download_timeout: 30
   # If true, skip downloading files that already exist in the temp directory.
-  use_download_cache: true
+  use_download_cache: false
   # If false, prevent downloading any new files. Useful for testing pipelines locally.
-  allow_new_downloads: false
+  allow_new_downloads: true
 
   # The API endpoint for the LLM service. Defaults to OpenAI if commented out.
   # endpoint: "https://api.openai.com/v1"
