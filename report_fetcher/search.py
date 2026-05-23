@@ -622,6 +622,36 @@ def perform_search(
 # --- search entrypoints ------------------------------------------------------
 
 
+def _check_url_is_pdf(url: str, sess: requests.Session, timeout: float = 5.0) -> bool:
+    """
+    Returns True if the URL points to an actual PDF.
+    Fast path: URL ends in .pdf — no request needed.
+    Slow path: Range GET for first 4 bytes, check %PDF magic number.
+    On any error, returns True (fail-safe: keep in pdf_links).
+    """
+    if url.lower().split("?")[0].endswith(".pdf"):
+        return True
+    try:
+        r = sess.get(url, headers={"Range": "bytes=0-3"}, timeout=timeout, stream=True)
+        chunk = r.raw.read(4)
+        r.close()
+        return chunk == b"%PDF"
+    except Exception:
+        return True
+
+
+def _validate_pdf_links(pdf_links: List[str]) -> List[str]:
+    """Filters pdf_links down to URLs confirmed as actual PDFs."""
+    sess = requests.Session()
+    validated = []
+    for url in pdf_links:
+        if _check_url_is_pdf(url, sess):
+            validated.append(url)
+        else:
+            logger.debug("Dropped non-PDF from pdf_links: %s", url)
+    return validated
+
+
 def find_report_links_categorized(
     city_name: str,
     api_key: str,
@@ -689,6 +719,8 @@ def find_report_links_categorized(
         page_links = score_results(page_json, city_name, city_country)
     else:
         page_links = [r.get("link") for r in page_json.get("organic_results", []) if r.get("link")]
+
+    pdf_links = _validate_pdf_links(pdf_links)
 
     # print("\n\n\nOPS")
     # logger.info(page_links)

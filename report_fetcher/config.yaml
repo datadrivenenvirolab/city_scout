@@ -13,6 +13,12 @@ llm_config:
   # Controls how much detail the model provides in its internal text processing (e.g., "low", "high").
   text_verbosity: "high"
 
+search_settings:
+  # Number of results fetched per focused query (3 queries run per city; merged into max_pdf_results slots).
+  results_per_query: 5
+  # If true, appends after:<MinYear> to queries when the row's MinYear exceeds the SEARCH_FOR_AFTER floor.
+  use_after_year_filter: false
+
 networking:
   # Maximum duration (in seconds) to wait for a PDF to download.
   pdf_download_timeout: 30
@@ -23,3 +29,9 @@ networking:
 
   # The API endpoint for the LLM service. Defaults to OpenAI if commented out.
   # endpoint: "https://api.openai.com/v1"
+
+classification_settings:
+  # When true, the LLM's own canonical type guess (LLMType field) is tried first via
+  # pick_canonical_report_type_with_llm() before falling back to the raw ReportType strict match.
+  # Set to false to restore legacy strict-only behavior.
+  use_llm_type_matching: true

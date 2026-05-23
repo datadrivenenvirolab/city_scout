@@ -1,10 +1,12 @@
 # fetch.py
 from __future__ import annotations
 
+import ipaddress
 import json
 import logging
 import random
 import re
+import socket
 import time
 from pathlib import Path
 from typing import Optional
@@ -16,12 +18,87 @@ from bs4 import BeautifulSoup
 
 from .config import (
     ALLOW_NEW_DOWNLOADS,
+    FETCH_HEAD_TIMEOUT,
+    MAX_PDF_DOWNLOAD_BYTES,
     PDF_DOWNLOAD_TIMEOUT_SECONDS,
     TRACKING_PARAMS,
     USE_DOWNLOAD_CACHE,
 )
 
 logger = logging.getLogger(__name__)
+
+
+# ---- error types ------------------------------------------------------------
+
+
+class FileTooLargeError(ValueError):
+    """Raised when a download would exceed MAX_PDF_DOWNLOAD_BYTES."""
+
+
+# ---- SSRF guard -------------------------------------------------------------
+
+
+def _is_safe_url(url: str) -> bool:
+    """Return False if the URL is non-HTTP(S) or resolves to a private/loopback address."""
+    try:
+        parsed = urlparse(url)
+        if parsed.scheme not in ("http", "https"):
+            return False
+        host = parsed.hostname
+        if not host:
+            return False
+        ip = ipaddress.ip_address(socket.gethostbyname(host))
+        return not (ip.is_private or ip.is_loopback or ip.is_link_local)
+    except Exception:
+        return False
+
+
+# ---- streaming helper -------------------------------------------------------
+
+
+def _read_response_body(r: requests.Response) -> bytes:
+    """Stream response body in chunks, raising FileTooLargeError if limit exceeded."""
+    chunks: list[bytes] = []
+    total = 0
+    for chunk in r.iter_content(65536):
+        if not chunk:
+            continue
+        total += len(chunk)
+        if total > MAX_PDF_DOWNLOAD_BYTES:
+            r.close()
+            raise FileTooLargeError(
+                f"Response exceeds {MAX_PDF_DOWNLOAD_BYTES:,} bytes"
+            )
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
+# ---- size pre-check ---------------------------------------------------------
+
+
+def _check_content_length(
+    sess: requests.Session,
+    url: str,
+    headers: dict,
+    timeout: float,
+) -> None:
+    """HEAD request to reject oversized files before downloading.
+
+    Silently skips if HEAD is not supported or times out — the streaming cap
+    in _read_response_body handles servers that don't advertise Content-Length.
+    """
+    try:
+        r = sess.head(url, headers=headers, timeout=FETCH_HEAD_TIMEOUT, allow_redirects=True)
+        cl = r.headers.get("Content-Length", "")
+        if cl.isdigit() and int(cl) > MAX_PDF_DOWNLOAD_BYTES:
+            raise FileTooLargeError(
+                f"Content-Length {int(cl):,} bytes exceeds limit for {url}"
+            )
+    except FileTooLargeError:
+        raise
+    except Exception:
+        pass
+
 
 # ---- header helpers ---------------------------------------------------------
 
@@ -40,7 +117,7 @@ def build_headers(user_agent: str):
         "Sec-Fetch-Site": "same-origin",
         "Sec-Fetch-Mode": "no-cors",
         "Sec-Fetch-Dest": "document",
-        "sec-ch-ua": '"Chromium";v="126", "Not=A?Brand";v="24"',
+        "sec-ch-ua": '"Chromium";v="136", "Not=A?Brand";v="24"',
         "sec-ch-ua-platform": '"Windows"',
         "sec-ch-ua-mobile": "?0",
     }
@@ -98,12 +175,11 @@ def download_pdf(
     sess = sess or requests.Session()
     timeout = timeout or PDF_DOWNLOAD_TIMEOUT_SECONDS
 
-    # UA rotation
     user_agents = [
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.2592.68",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3 Safari/605.1.15",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0",
     ]
     ua = random.choice(user_agents)
     pdf_headers, html_headers = build_headers(ua)
@@ -127,6 +203,14 @@ def download_pdf(
         dir_url = clean_url.rsplit("/", 1)[0] + "/"
         listing_url = f"{origin}/csrreports/"  # harmless if 404
 
+        # --- SSRF guard ---
+        if not _is_safe_url(clean_url):
+            logger.warning("Blocked private/internal URL: %s", url)
+            return False
+
+        # --- Size pre-check (one HEAD before any GETs) ---
+        _check_content_length(sess, clean_url, pdf_headers, timeout)
+
         part_path = save_path.with_suffix(save_path.suffix + ".part")
 
         def finalize_download(content: bytes):
@@ -136,13 +220,15 @@ def download_pdf(
         # --- Attempt 1: direct fetch ---
         logger.info("Download attempt 1 (direct): %s", clean_url)
         hdrs = with_headers(pdf_headers, Range="bytes=0-")
-        r = sess.get(clean_url, headers=hdrs, timeout=timeout, allow_redirects=True, verify=True)
+        r = sess.get(clean_url, headers=hdrs, timeout=timeout, allow_redirects=True,
+                     verify=True, stream=True)
 
         if r.ok and _is_pdf_response(r):
-            finalize_download(r.content)
+            finalize_download(_read_response_body(r))
             logger.info("Downloaded PDF (direct): %s -> %s", clean_url, save_path)
             return True
         else:
+            r.close()
             logger.debug(
                 "Attempt 1 not PDF/OK: status=%s, ctype=%s",
                 getattr(r, "status_code", None),
@@ -166,21 +252,26 @@ def download_pdf(
             ):
                 pdf_url = _find_pdf_link_in_html(html_resp.text, base_url=html_resp.url)
                 if pdf_url:
-                    hdrs2 = with_headers(pdf_headers, Referer=html_resp.url, Range="bytes=0-")
-                    logger.info("Found PDF link on page: %s", pdf_url)
-                    pdf_resp = sess.get(
-                        pdf_url, headers=hdrs2, timeout=timeout, allow_redirects=True, verify=True
-                    )
-                    if pdf_resp.ok and _is_pdf_response(pdf_resp):
-                        finalize_download(pdf_resp.content)
-                        logger.info("Downloaded PDF (parsed link): %s -> %s", pdf_url, save_path)
-                        return True
+                    if not _is_safe_url(pdf_url):
+                        logger.warning("HTML fallback URL blocked (SSRF): %s", pdf_url)
                     else:
-                        logger.debug(
-                            "Parsed link not PDF/OK: status=%s, ctype=%s",
-                            getattr(pdf_resp, "status_code", None),
-                            pdf_resp.headers.get("Content-Type", ""),
+                        hdrs2 = with_headers(pdf_headers, Referer=html_resp.url, Range="bytes=0-")
+                        logger.info("Found PDF link on page: %s", pdf_url)
+                        pdf_resp = sess.get(
+                            pdf_url, headers=hdrs2, timeout=timeout, allow_redirects=True,
+                            verify=True, stream=True,
                         )
+                        if pdf_resp.ok and _is_pdf_response(pdf_resp):
+                            finalize_download(_read_response_body(pdf_resp))
+                            logger.info("Downloaded PDF (parsed link): %s -> %s", pdf_url, save_path)
+                            return True
+                        else:
+                            pdf_resp.close()
+                            logger.debug(
+                                "Parsed link not PDF/OK: status=%s, ctype=%s",
+                                getattr(pdf_resp, "status_code", None),
+                                pdf_resp.headers.get("Content-Type", ""),
+                            )
 
         # --- Attempt 3: WAF warm-up then retry ---
         logger.info("Attempt 3: WAF warm-up then retry")
@@ -199,11 +290,13 @@ def download_pdf(
 
         hdrs3 = with_headers(pdf_headers, Referer=listing_url, Range="bytes=0-")
         logger.info("Retry after warm-up: %s", clean_url)
-        r2 = sess.get(clean_url, headers=hdrs3, timeout=timeout, allow_redirects=True, verify=True)
+        r2 = sess.get(clean_url, headers=hdrs3, timeout=timeout, allow_redirects=True,
+                      verify=True, stream=True)
         if r2.ok and _is_pdf_response(r2):
-            finalize_download(r2.content)
+            finalize_download(_read_response_body(r2))
             logger.info("Downloaded PDF (after warm-up): %s -> %s", clean_url, save_path)
             return True
+        r2.close()
 
         logger.warning(
             "All attempts failed: %s (status=%s / %s)",
@@ -213,6 +306,9 @@ def download_pdf(
         )
         return False
 
+    except FileTooLargeError:
+        logger.warning("PDF too large, skipping: %s", url)
+        return False
     except requests.exceptions.Timeout:
         logger.warning("Download timed out: %s", url)
         return False
@@ -251,10 +347,10 @@ def scrape_report_page_for_pdfs(
     potential_pdf_links: list[str] = []
 
     user_agents = [
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.2592.68",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3 Safari/605.1.15",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0",
     ]
     headers = {"User-Agent": random.choice(user_agents)}
 
@@ -321,11 +417,10 @@ def _is_pdf_response(resp) -> bool:
 def _find_pdf_link_in_html(html: str, base_url: str) -> str | None:
     soup = BeautifulSoup(html, "html.parser")
 
-    # Anchors
+    # Anchors with .pdf in the href
     for a in soup.find_all("a", href=True):
         href = str(a["href"])
-        txt = (a.get_text() or "").lower()
-        if ".pdf" in href.lower() or "download" in txt:
+        if ".pdf" in href.lower():
             return requests.compat.urljoin(base_url, href)
 
     # Embedded viewers

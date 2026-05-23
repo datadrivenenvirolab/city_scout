@@ -1,0 +1,32 @@
+focused_terms:
+  de:
+    q1: '"Klimaschutz" OR "Klimaschutzprogramm" OR "Energie- und Klimaschutzprogramm" OR "BEK 2030"'
+    q2: '"klimaneutral" OR "Klimaneutralität" OR "CO2-neutral" OR "Netto-Null"'
+    q3: '"Klimaanpassung" OR "Anpassung an den Klimawandel" OR "Klimaschutz- und Klimaanpassungskonzept" OR "Energieaktionsplan"'
+
+  fr:
+    q1: >-
+      "plan climat" OR "Plan Climat de Paris" OR "plan d’action climatique" OR "Plan Climat Air Énergie"
+    q2: ‘"neutralité carbone" OR "neutre en carbone" OR "zéro émission nette" OR "net zéro"’
+    q3: >-
+      "adaptation au changement climatique" OR "stratégie d’adaptation" OR "plan d’action énergétique" OR "atténuation du changement climatique"
+
+  es:
+    q1: '"plan de acción climática" OR "acción climática" OR "estrategia climática" OR "plan climático"'
+    q2: '"neutralidad climática" OR "neutralidad de carbono" OR "cero emisiones netas" OR "carbono neutral"'
+    q3: '"adaptación climática" OR "adaptación al cambio climático" OR "hoja de ruta hacia la neutralidad climática" OR "mitigación del cambio climático"'
+
+  ru:
+    q1: '"Климатический план" OR "Климатический план Москвы" OR "Региональный климатический план" OR "климатическая повестка"'
+    q2: '"углеродная нейтральность" OR "углеродно-нейтральный" OR "чистый ноль" OR "нулевые чистые выбросы"'
+    q3: '"адаптация к изменению климата" OR "адаптация к климатическим изменениям" OR "план адаптации" OR "сокращение выбросов"'
+
+  zh:
+    q1: '"应对气候变化行动计划" OR "气候行动计划" OR "气候变化行动方案" OR "气候行动方案"'
+    q2: '"碳中和" OR "碳达峰" OR "净零排放" OR "零碳"'
+    q3: '"适应气候变化" OR "气候适应" OR "适应气候变化行动方案" OR "绿色能源行动计划"'
+
+  ja:
+    q1: '"ゼロエミッション東京戦略" OR "気候変動対策" OR "気候変動対策計画" OR "環境基本計画"'
+    q2: '"CO2排出実質ゼロ" OR "実質ゼロ" OR "カーボンハーフ" OR "脱炭素"'
+    q3: '"気候変動適応計画" OR "気候変動適応" OR "適応策" OR "気候変動適応策"'

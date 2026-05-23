@@ -14,10 +14,11 @@ from urllib.parse import urlparse
 import pymupdf  # PyMuPDF
 import pandas as pd
 
-from .classify import is_relevant_pdf, pick_canonical_report_type_strict
+from .classify import is_relevant_pdf, pick_canonical_report_type_strict, pick_canonical_report_type_with_llm
 from .config import PDF_DIR  # if you use it elsewhere
 from .config import (  # Add these to config.py if not present:; TEMP_PDF_DIR = BASE_DIR / "tmp_pdfs"; CONFIRMED_PDF_DIR = PDF_DIR
     BASE_DIR,
+    USE_LLM_TYPE_MATCHING,
 )
 from .fetch import download_pdf
 
@@ -96,6 +97,7 @@ def check_and_save_pdf(
         "final_year": "unknown year",
         "language": "unknown",  # <- added
         "ai_reasoning": None,
+        "llm_type": None,
         "llm_response": None,
         # "save_date" will be set only when actually saved
     }
@@ -134,29 +136,35 @@ def check_and_save_pdf(
         client=client,
     )
     try:
-        final_rel, report_type_from_ai, year_from_ai, lang_code, reasoning_from_ai, raw_resp = result
-    except Exception:
+        final_rel, report_type_from_ai, year_from_ai, lang_code, reasoning_from_ai, raw_resp, llm_type_from_ai = result
+    except ValueError:
+        logger.warning("is_relevant_pdf returned unexpected tuple length %d; using defensive fallback.", len(result))
         if len(result) == 6:
             final_rel, report_type_from_ai, year_from_ai, lang_code, reasoning_from_ai, raw_resp = result
+            llm_type_from_ai = ""
         elif len(result) == 5:
             final_rel, report_type_from_ai, year_from_ai, lang_code, raw_resp = result
             reasoning_from_ai = ""
+            llm_type_from_ai = ""
         elif len(result) == 4:
             final_rel, report_type_from_ai, year_from_ai, lang_code = result
             reasoning_from_ai = ""
             raw_resp = ""
+            llm_type_from_ai = ""
         elif len(result) == 3:
             final_rel, report_type_from_ai, year_from_ai = result
             lang_code = "unknown"
             reasoning_from_ai = ""
             raw_resp = ""
+            llm_type_from_ai = ""
         else:
-            raise Exception("Unexpected result format from is_relevant_pdf")
+            raise
 
     meta["ai_report_type"] = (report_type_from_ai or "").strip()
     meta["ai_year_raw"] = year_from_ai
     meta["language"] = (lang_code or "unknown").lower()
     meta["ai_reasoning"] = reasoning_from_ai
+    meta["llm_type"] = (llm_type_from_ai or "").strip()
     meta["llm_response"] = raw_resp
 
     # --- Year handling ---
@@ -168,18 +176,21 @@ def check_and_save_pdf(
             y = int(cleaned)
             current_year = _dt.datetime.now().year
             min_ok = min_year if min_year is not None else (current_year - 2)
-            if min_ok <= y <= current_year:
+            if y >= min_ok:
                 final_year = str(y)
                 logger.debug("Using AI year: %s", final_year)
             else:
                 too_old = True
-                logger.info("AI year %s outside acceptable range (%s-%s).", y, min_ok, current_year)
+                logger.info("AI year %s before minimum acceptable year %s.", y, min_ok)
         except ValueError:
             logger.debug("Could not parse AI year '%s'.", cleaned)
     meta["final_year"] = final_year
 
-    # Canonical type (strict, no upgrades)
-    canonical = pick_canonical_report_type_strict(meta["ai_report_type"])
+    # Canonical type resolution — cascade or legacy strict-only based on config flag
+    if USE_LLM_TYPE_MATCHING:
+        canonical = pick_canonical_report_type_with_llm(meta["llm_type"], meta["ai_report_type"])
+    else:
+        canonical = pick_canonical_report_type_strict(meta["ai_report_type"])
     meta["canonical_type"] = canonical
 
     # --- Decide outcomes ---
@@ -216,11 +227,12 @@ def check_and_save_pdf(
 
     # Save to confirmed location with sanitized filename
     safe_city = re.sub(r"[^\w\-_. ]", "", city_name_str)
-    final_report_type_for_filename = canonical
+    raw_report_type = meta["ai_report_type"] or ""
+    safe_report_type = re.sub(r"[^\w\-_. ]", "", raw_report_type)
     final_year_for_filename = final_year.replace(" ", "_")
 
     confirmed_filename = (
-        f"{safe_city}_{final_report_type_for_filename}_{final_year_for_filename}.pdf"
+        f"{safe_city}_{safe_report_type}_{final_year_for_filename}.pdf"
     )
     confirmed_path = confirmed_dir / confirmed_filename
 
@@ -228,7 +240,7 @@ def check_and_save_pdf(
     counter = 1
     while confirmed_path.exists():
         confirmed_filename = (
-            f"{safe_city}_{final_report_type_for_filename}_{final_year_for_filename}_{counter}.pdf"
+            f"{safe_city}_{safe_report_type}_{final_year_for_filename}_{counter}.pdf"
         )
         confirmed_path = confirmed_dir / confirmed_filename
         counter += 1

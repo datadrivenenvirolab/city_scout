@@ -91,11 +91,17 @@ ACCEPTABLE_REPORT_TYPES = [
 
 ACCEPTABLE_REPORT_TYPES_LOWER = [t.lower() for t in ACCEPTABLE_REPORT_TYPES]
 
+# === Classification Cascade Settings ===
+_classification_cfg = get_config_section("classification_settings")
+USE_LLM_TYPE_MATCHING: bool = bool(_classification_cfg.get("use_llm_type_matching", False))
+
 # === Networking / Download Settings ===
 net_cfg = get_config_section("networking")
 PDF_DOWNLOAD_TIMEOUT_SECONDS = net_cfg.get("pdf_download_timeout", 30)
 USE_DOWNLOAD_CACHE = net_cfg.get("use_download_cache", True)
 ALLOW_NEW_DOWNLOADS = net_cfg.get("allow_new_downloads", True)
+MAX_PDF_DOWNLOAD_BYTES = net_cfg.get("max_pdf_download_bytes", 50 * 1024 * 1024)  # 50 MB
+FETCH_HEAD_TIMEOUT = net_cfg.get("fetch_head_timeout", 8.0)
 TRACKING_PARAMS = {
     "utm_source",
     "utm_medium",
@@ -113,7 +119,7 @@ search_cfg = get_config_section("search_settings")
 MAX_PDF_RESULTS = search_cfg.get("max_pdf_results", 10)
 MAX_PAGE_RESULTS = search_cfg.get("max_page_results", 10)
 SEARCH_LANGUAGE_PRIORITY = search_cfg.get("search_language_priority", "native")
-STAGE1_SCORING_ENABLED = search_cfg.get("stage1_scoring_enabled", True)
+STAGE1_SCORING_ENABLED = search_cfg.get("stage1_scoring_enabled", False)
 
 CITY_NAME_COLUMN = "City"
 # ASSOCIATION_NAME_COLUMN = "Association"
@@ -181,7 +187,7 @@ YEAR_REGEX = r"\b(19|20)\d{2}\b"
 # "process_all"         -> always process page links
 # "process_if_no_pdfs"  -> process page links only if initial PDFs found none
 # "skip"                -> never process page links
-STAGE2_PAGE_PROCESSING_CONFIG = "process_if_no_pdfs"
+STAGE2_PAGE_PROCESSING_CONFIG = "skip"
 
 # === Stage 2 Caps / Limits ===
 TOP_K_PAGES_PER_DOMAIN = 3
@@ -202,3 +208,5 @@ USE_DDGS = search_cfg.get("use_ddgs", False)
 USE_SEARCH_CACHE = search_cfg.get("use_search_cache", True)
 
 MAX_QUERY_WORDS = search_cfg.get("max_query_words", 32)
+RESULTS_PER_QUERY = search_cfg.get("results_per_query", 5)
+USE_AFTER_YEAR_FILTER = search_cfg.get("use_after_year_filter", False)

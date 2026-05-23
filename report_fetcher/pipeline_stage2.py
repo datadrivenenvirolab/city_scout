@@ -222,7 +222,7 @@ def run_scraper_from_df(
         failed_df: rows for download failures
         mismatch_df: rows for relevant-but-non-accepted type
     """
-    target_cols = COLUMNS + ["Filename", "Canonical Type", "Language", "Year", "Save Date", "PDF URL", "AI_Reasoning", "LLM Response"]
+    target_cols = COLUMNS + ["Filename", "Canonical Type", "Extracted Type", "Language", "Year", "Save Date", "PDF URL", "AI_Reasoning", "LLM Response"]
 
     if dataframe is None or dataframe.empty:
         return (
@@ -302,6 +302,7 @@ def run_scraper_from_df(
                             COUNTRY_NAME_COLUMN: country,
                             "Filename": os.path.basename(saved_path),
                             "Canonical Type": meta.get("canonical_type") or "",
+                            "Extracted Type": meta.get("ai_report_type") or "",
                             "Language": (meta.get("language") or "unknown"),
                             "Year": meta.get("final_year") or "",
                             "Save Date": meta.get("save_date") or _dt.date.today().isoformat(),
@@ -327,7 +328,8 @@ def run_scraper_from_df(
                             "City": city,
                             "Country": country,
                             "PDF_Link": link,
-                            "AI_Report_Type": meta.get("ai_report_type"),
+                            "Extracted Type": meta.get("ai_report_type"),
+                            "LLM Type": meta.get("llm_type") or "",
                             "AI_Year_Raw": meta.get("ai_year_raw"),
                             "Final_Year_Used": meta.get("final_year"),
                             "Reason": "Relevant by AI, but type not in ACCEPTABLE_REPORT_TYPES",
@@ -422,6 +424,7 @@ def run_scraper_from_df(
                                 COUNTRY_NAME_COLUMN: country,
                                 "Filename": os.path.basename(saved_path),
                                 "Canonical Type": meta.get("canonical_type") or "",
+                                "Extracted Type": meta.get("ai_report_type") or "",
                                 "Language": (meta.get("language") or "unknown"),
                                 "Year": meta.get("final_year") or "",
                                 "Save Date": meta.get("save_date") or _dt.date.today().isoformat(),
@@ -447,7 +450,8 @@ def run_scraper_from_df(
                                 "City": city,
                                 "Country": country,
                                 "PDF_Link": pdf_url,
-                                "AI_Report_Type": meta.get("ai_report_type"),
+                                "Extracted Type": meta.get("ai_report_type"),
+                                "LLM Type": meta.get("llm_type") or "",
                                 "AI_Year_Raw": meta.get("ai_year_raw"),
                                 "Final_Year_Used": meta.get("final_year"),
                                 "Reason": "Relevant by AI, but type not in ACCEPTABLE_REPORT_TYPES",
@@ -479,7 +483,7 @@ def run_scraper_from_df(
     # Return dataframes with explicit column order
     results_df = pd.DataFrame(
         results,
-        columns=COLUMNS + ["Filename", "Canonical Type", "Language", "Year", "Save Date", "PDF URL", "AI_Reasoning", "LLM Response"],
+        columns=COLUMNS + ["Filename", "Canonical Type", "Extracted Type", "Language", "Year", "Save Date", "PDF URL", "AI_Reasoning", "LLM Response"],
     )
     failed_df = pd.DataFrame(failed_download_rows)
     mismatch_df = pd.DataFrame(type_mismatch_rows)

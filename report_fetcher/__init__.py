@@ -7,6 +7,7 @@ from . import (
     pipeline_stage1,
     pipeline_stage2,
     search,
+    search_focused,
     utils,
     new_functions,
 )
@@ -21,13 +22,13 @@ __all__ = [
     "fetch",
     "pdf_utils",
     "search",
+    "search_focused",
     "utils",
     "pipeline_stage1",
     "pipeline_stage2",
     # convenience exports:
     "stage1_main",
     "stage2_main",
-    ""
 ]
 
 __version__ = "0.1.0"

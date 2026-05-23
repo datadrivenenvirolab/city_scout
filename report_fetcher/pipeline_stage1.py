@@ -21,7 +21,8 @@ from .config import (  # CITY_NAME_COLUMN,
     SUBREGION_NAME_COLUMN,
     COLUMNS_IMP
 )
-from .search import find_report_links_categorized, process_companies_for_reports
+# from .search import find_report_links_categorized, process_companies_for_reports
+from .search_focused import process_companies_for_reports_focused as process_companies_for_reports
 
 # for column in COLUMNS:
 #     from .config import column

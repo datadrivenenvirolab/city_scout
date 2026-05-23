@@ -35,21 +35,22 @@ def is_relevant_pdf(
     province: str = "a province",
     model: str = OPENAI_MODEL,
     max_chars: int = 6000,
-) -> tuple[bool, str, str, str, str, str]:
+) -> tuple[bool, str, str, str, str, str, str]:
     """
     Ask the LLM to classify a PDF excerpt.
 
     Returns:
-        (final_relevance: bool, report_type: str, year: str, language: str)
+        (final_relevance, report_type, year, language, reasoning, raw_response, llm_type)
         - final_relevance is True only if LLM says Relevance=Yes AND CorrectCity=Yes.
         - report_type is the raw type extracted from the LLM response (not canonicalized).
         - year is a 4-digit year or 'unknown year'.
         - language is the 2-letter ISO 639-1 code for the document's language.
         - raw_response is the exact text returned by the LLM.
+        - llm_type is the canonical type the LLM chose from ACCEPTABLE_REPORT_TYPES, or "" if none/parse failure.
     """
     if not text or len(text.strip()) < 50:
         logger.warning("is_relevant_pdf: empty or too-short text (len=%s)", len(text or ""))
-        return False, "unknown_type", "unknown year", "unknown", "", ""
+        return False, "unknown_type", "unknown year", "unknown", "", "", ""
 
     excerpt = text[:max_chars]
     logger.debug(
@@ -69,9 +70,16 @@ def is_relevant_pdf(
         resp = client.responses.create(
             model=model,
             input=(
+                # SYNC: must match prompts.yaml OUTPUT FORMAT line
                 "Respond ONLY in this exact format on one line: "
-                "Relevance: <Yes/No>, CorrectCity: <Yes/No>, ReportType: <Type>, Year: <Year>, Language: <xx>, Reasoning: <Brief explanation>\n\n"
-                + prompt.format(excerpt=excerpt, city_name=city_name, province=province, country=country)
+                "Relevance: <Yes/No>, CorrectCity: <Yes/No>, ReportType: <Type>, LLMType: <CanonicalType>, Year: <Year>, Language: <xx>, Reasoning: <Brief explanation>\n\n"
+                + prompt.format(
+                    excerpt=excerpt,
+                    city_name=city_name,
+                    province=province,
+                    country=country,
+                    acceptable_types=", ".join(ACCEPTABLE_REPORT_TYPES),
+                )
             ),
             reasoning={"effort": config.get("reasoning_effort", "minimal")},
             text={"verbosity": config.get("text_verbosity", "low")},
@@ -82,11 +90,11 @@ def is_relevant_pdf(
         print(f"\n[LLM RESPONSE] {raw}\n")
     except Exception as e:
         logger.error("OpenAI classification call failed: %s", e, exc_info=True)
-        return False, "openai_error", "unknown year", "unknown", "", ""
+        return False, "openai_error", "unknown year", "unknown", "", "", ""
 
     if not raw:
         logger.warning("LLM returned empty output_text.")
-        return False, "parse_error", "unknown year", "unknown", "", ""
+        return False, "parse_error", "unknown year", "unknown", "", "", ""
     # raise "dadum"
     logger.debug("LLM raw line: %r", raw)
 
@@ -95,9 +103,12 @@ def is_relevant_pdf(
     relevance = bool(re.search(r"\brelevance\s*:\s*yes\b", s))
     correct_city = bool(re.search(r"\bcorrectcity\s*:\s*yes\b", s))
 
-    m_type = re.search(r"reporttype:\s*(.+?)(?:,\s*year:|\s+year:|\n|$)", raw, flags=re.I | re.S)
+    m_type = re.search(r"reporttype:\s*(.+?)(?:,\s*llmtype:|\s+llmtype:|\n|$)", raw, flags=re.I | re.S)
     report_type = m_type.group(1).strip() if m_type else "unknown_type"
     report_type = report_type.strip(" '\"")
+
+    m_llm_type = re.search(r"llmtype:\s*(.+?)(?:,\s*year:|\s+year:|\n|$)", raw, flags=re.I | re.S)
+    llm_type = m_llm_type.group(1).strip().strip(" '\"") if m_llm_type else ""
 
     m_year = re.search(r"\byear\s*:\s*([0-9]{4}|unknown)\b", s, flags=re.I)
     year_raw = m_year.group(1).strip().lower() if m_year else "unknown"
@@ -123,7 +134,7 @@ def is_relevant_pdf(
         )
 
     final_relevance = bool(relevance and correct_city)
-    return final_relevance, report_type, year, lang, reasoning, raw
+    return final_relevance, report_type, year, lang, reasoning, raw, llm_type
 
 
 def pick_canonical_report_type_strict(ai_report_type: str) -> Optional[str]:
@@ -156,3 +167,23 @@ def pick_canonical_report_type_strict(ai_report_type: str) -> Optional[str]:
             return canonical
 
     return None
+
+
+def pick_canonical_report_type_with_llm(
+    llm_type: str,
+    ai_report_type: str,
+) -> Optional[str]:
+    """
+    Two-step cascade for canonical type resolution:
+      1. Try pick_canonical_report_type_strict on llm_type (LLM's own canonical guess).
+      2. If that returns None, fall back to pick_canonical_report_type_strict on ai_report_type.
+
+    Returns the canonical value from ACCEPTABLE_REPORT_TYPES or None.
+    """
+    if llm_type and llm_type.lower() not in ("none", ""):
+        candidate = pick_canonical_report_type_strict(llm_type)
+        if candidate is not None:
+            logger.debug("LLM-guided match: %r -> %r", llm_type, candidate)
+            return candidate
+        logger.debug("LLMType %r did not strict-match; falling back to raw type.", llm_type)
+    return pick_canonical_report_type_strict(ai_report_type)
