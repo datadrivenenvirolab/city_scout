@@ -2,3 +2,6 @@
 outputs/
 .env
 search_cache.json
+
+__pycache__/
+*.pyc
