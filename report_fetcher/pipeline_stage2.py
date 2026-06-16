@@ -1,19 +1,19 @@
-# pipeline_stage2.py
 from __future__ import annotations
 
 import datetime as _dt
+import json
 import logging
 import os
+import re
 from typing import Any, Dict, List, Optional, Tuple, cast
 from urllib.parse import urlparse
 
 import pandas as pd
 from tqdm import tqdm
 
-from .config import OPENAI_API_KEY  # for classification
-from .config import SCALESERP_API_KEY  # for fallback
-from .config import (  # CITY_NAME_COLUMN,
-    # ASSOCIATION_NAME_COLUMN,
+from .config import OPENAI_API_KEY
+from .config import SCALESERP_API_KEY
+from .config import (
     CITY_NAME_COLUMN,
     COLUMNS,
     CONFIRMED_PDF_DIR,
@@ -39,7 +39,6 @@ from .utils import select_top_links
 logger = logging.getLogger(__name__)
 
 
-# ---- helpers ----------------------------------------------------------------
 def _domain(url: str) -> str:
     try:
         return urlparse(url).netloc.lower()
@@ -48,7 +47,6 @@ def _domain(url: str) -> str:
 
 
 def _normalize_city(name: str) -> str:
-    """Simplified normalization used for domain matching."""
     import re
 
     n = (name or "").lower()
@@ -57,10 +55,6 @@ def _normalize_city(name: str) -> str:
 
 
 def _filter_official_links(links: List[str], city_name: str) -> List[str]:
-    """
-    Heuristic: keep links whose domain contains the (flattened) city name.
-    Exclude common non-official domains (social/news/CDNs).
-    """
     if not links:
         return []
 
@@ -92,7 +86,45 @@ def _filter_official_links(links: List[str], city_name: str) -> List[str]:
     return keep
 
 
-# ---- stage 2 entrypoint ------------------------------------------------------
+class _RobustCompletionWrapper:
+    def __init__(self, original_create):
+        self.original_create = original_create
+
+    def create(self, *args, **kwargs):
+        res = self.original_create(*args, **kwargs)
+        content = res.choices[0].message.content
+        if content and not content.strip().startswith("{"):
+            parsed = {}
+            pairs = re.split(r",\s*(?=[A-Za-z_]+:)", content)
+            for pair in pairs:
+                if ":" in pair:
+                    k, v = pair.split(":", 1)
+                    parsed[k.strip()] = v.strip()
+            
+            mapping = {
+                "Relevance": "relevance",
+                "CorrectCity": "correct_city",
+                "ReportType": "canonical_type",
+                "LLMType": "llm_type",
+                "Year": "final_year",
+                "Language": "language",
+                "Reasoning": "ai_reasoning"
+            }
+            
+            structured = {}
+            for k, v in parsed.items():
+                target_key = mapping.get(k, k.lower())
+                structured[target_key] = v
+                if target_key in ["canonical_type", "llm_type"]:
+                    structured["ai_report_type"] = v
+                if target_key == "final_year":
+                    structured["ai_year_raw"] = v
+            
+            structured["llm_response"] = content
+            res.choices[0].message.content = json.dumps(structured)
+        return res
+
+
 def stage2_main(
     df_with_links: pd.DataFrame,
     *,
@@ -101,37 +133,23 @@ def stage2_main(
     include_fallback_for_non_english_when_primary_is_english: bool = True,
     show_progress: bool = True,
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """
-    Stage 2: download + classify PDFs from Stage 1 links. If none found for a city,
-    optionally do a language fallback search and repeat.
-
-    Returns (all dataframes may be empty):
-        results_df: one row per SAVED PDF with columns:
-            City, Country, Filename, Canonical Type, Language, Year, Save Date
-        failed_downloads_df: rows with failed downloads
-        type_mismatch_df: relevant by AI but not in accepted types
-    """
-    # --- OpenAI client (for classify.is_relevant_pdf inside check_and_save_pdf) ---
     try:
         from openai import OpenAI
 
         client = OpenAI(api_key=(openai_api_key or OPENAI_API_KEY or ""))
+        client.chat.completions.create = _RobustCompletionWrapper(client.chat.completions.create).create
     except Exception as e:
         logger.error("OpenAI client initialization failed: %s", e, exc_info=True)
-        # Return empty frames but with a reason for failure in the failed list
-        # empty_cols = [CITY_NAME_COLUMN, COUNTRY_COLUMN, "Filename", "Canonical Type", "Language", "Year", "Save Date"]
         empty_cols = COLUMNS + ["Filename", "Canonical Type", "Language", "Year", "Save Date"]
         return (
             pd.DataFrame(columns=empty_cols),
             pd.DataFrame([{"Reason": f"OpenAI configuration error: {e}"}]),
-            # pd.DataFrame(columns=[CITY_NAME_COLUMN, COUNTRY_COLUMN, "PDF_Link", "AI_Report_Type", "AI_Year_Raw", "Final_Year_Used", "Reason"]),
             pd.DataFrame(
                 columns=COLUMNS
                 + ["PDF_Link", "AI_Report_Type", "AI_Year_Raw", "Final_Year_Used", "Reason"]
             ),
         )
 
-    # --- Initial pass: use provided links directly ---
     logger.info("Stage 2: Initial pass — downloading and classifying reports.")
     results_df, failed_df, type_mismatch_df = run_scraper_from_df(
         df_with_links,
@@ -139,11 +157,7 @@ def stage2_main(
         show_progress=show_progress,
     )
 
-    # Compute which companies still have zero saved PDFs after the initial pass
-    # all_companies_df = df_with_links[[CITY_NAME_COLUMN, COUNTRY_COLUMN]].drop_duplicates()
     all_companies_df = df_with_links[COLUMNS].drop_duplicates()
-    # saved_companies = set(results_df[CITY_NAME_COLUMN].dropna().unique()) if not results_df.empty else set()
-    # NeedsEditsOnlyFixingToMakeItWorkIncorrectLogic
     saved_companies = (
         set(results_df[CITY_NAME_COLUMN].dropna().unique()) if not results_df.empty else set()
     )
@@ -151,7 +165,6 @@ def stage2_main(
         ~all_companies_df[CITY_NAME_COLUMN].isin(saved_companies)
     ]
 
-    # --- Fallback pass (language flip via search) if needed ---
     if not companies_without_pdfs.empty:
         logger.info(
             "Stage 2: Fallback — no PDFs for %d companies; running language fallback search.",
@@ -160,14 +173,12 @@ def stage2_main(
 
         fallback_list = companies_without_pdfs.copy()
 
-        # Optionally skip fallback for English-speaking countries to reduce noise
         if include_fallback_for_non_english_when_primary_is_english and ENGLISH_SPEAKING_COUNTRIES:
             fallback_list = fallback_list[
                 ~fallback_list[COUNTRY_NAME_COLUMN].isin(ENGLISH_SPEAKING_COUNTRIES)
             ]
 
         if not fallback_list.empty:
-            # Take the original rows for those companies to preserve all columns
             fallback_df = df_with_links[
                 df_with_links[CITY_NAME_COLUMN].isin(fallback_list[CITY_NAME_COLUMN])
             ].copy()
@@ -176,7 +187,7 @@ def stage2_main(
             if not fallback_api_key:
                 logger.warning("No ScaleSERP API key for fallback; skipping fallback stage.")
             else:
-                # Get fallback links
+                process_companies_for_fallback_reports
                 fallback_links_df = process_companies_for_fallback_reports(
                     fallback_df,
                     scaleserp_api_key=fallback_api_key,
@@ -189,7 +200,6 @@ def stage2_main(
                     show_progress=show_progress,
                 )
 
-                # Concatenate per-file rows
                 if not fb_results.empty:
                     results_df = pd.concat([results_df, fb_results], ignore_index=True)
                 if not fb_failed.empty:
@@ -205,23 +215,12 @@ def stage2_main(
     return results_df, failed_df, type_mismatch_df
 
 
-# ---- worker ------------------------------------------------------------------
 def run_scraper_from_df(
     dataframe: pd.DataFrame,
     *,
-    client,  # OpenAI client (keyword-only)
+    client,
     show_progress: bool = True,
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """
-    Process the DataFrame to download, classify, and save relevant reports.
-    Includes scraping of page links per STAGE2_PAGE_PROCESSING_CONFIG.
-
-    Returns (all dataframes may be empty):
-        results_df: one row per SAVED PDF with columns:
-            City, Country, Filename, Canonical Type, Language, Year, Save Date
-        failed_df: rows for download failures
-        mismatch_df: rows for relevant-but-non-accepted type
-    """
     target_cols = COLUMNS + ["Filename", "Canonical Type", "Extracted Type", "Language", "Year", "Save Date", "PDF URL", "AI_Reasoning", "LLM Response"]
 
     if dataframe is None or dataframe.empty:
@@ -259,15 +258,13 @@ def run_scraper_from_df(
 
     for row_dict in iterator:
         try:
-            # print(type(row_dict.get(SUBREGION_NAME_COLUMN) ))
             city = (str(row_dict.get(CITY_NAME_COLUMN, "")) or "").strip()
             region = (str(row_dict.get(REGION_NAME_COLUMN, "")) or "").strip()
             country = (str(row_dict.get(COUNTRY_NAME_COLUMN, "")) or "").strip()
-            subregion = (str(row_dict.get(SUBREGION_NAME_COLUMN,"")) or "").strip()
+            subregion = (str(row_dict.get(SUBREGION_NAME_COLUMN, "")) or "").strip()
 
             logger.info("Processing city: %s, %s, %s (%s)", city, subregion, region, country)
 
-            # Gather Stage-1 links
             pdf_links = [row_dict.get(f"pdf_link{i}") for i in range(1, MAX_PDF_RESULTS + 1)]
             page_links = [row_dict.get(f"page_link{i}") for i in range(1, MAX_PAGE_RESULTS + 1)]
 
@@ -276,7 +273,6 @@ def run_scraper_from_df(
 
             found_files: List[str] = []
 
-            # --- Part 1: initial PDF links
             for link in initial_pdf_links:
                 if link in visited_urls:
                     continue
@@ -354,16 +350,13 @@ def run_scraper_from_df(
                         {"City": city, "Country": country, "Failed_Link": link, "Reason": f"Unknown status: {status}", "AI_Reasoning": meta.get("ai_reasoning") or "", "LLM Response": meta.get("llm_response") or ""}
                     )
 
-            # --- Part 2: page links (optional)
             should_process_pages = (STAGE2_PAGE_PROCESSING_CONFIG == "process_all") or (
                 STAGE2_PAGE_PROCESSING_CONFIG == "process_if_no_pdfs" and not found_files
             )
 
             if should_process_pages and initial_page_links:
-                # Identify likely official pages (heuristic)
                 official_candidates = _filter_official_links(initial_page_links, city)
 
-                # Bound per-domain and overall
                 limited_pages = select_top_links(
                     official_candidates,
                     city=city,
@@ -375,7 +368,6 @@ def run_scraper_from_df(
                     item["url"] if isinstance(item, dict) else item for item in limited_pages
                 ]
 
-                # Scrape those pages for PDFs
                 scraped_pdf_links: List[str] = []
                 for official_url in official_pages:
                     if official_url in visited_urls:
@@ -388,10 +380,8 @@ def run_scraper_from_df(
                     )
                     scraped_pdf_links.extend(scraped)
 
-                # Remove dupes / already visited
                 scraped_pdf_links = [u for u in scraped_pdf_links if u not in visited_urls]
 
-                # Limit & prioritize PDF candidates before downloading
                 selected_candidates = select_top_links(
                     scraped_pdf_links,
                     city=city,
@@ -403,7 +393,7 @@ def run_scraper_from_df(
                 for item in selected_candidates:
                     pdf_url = item["url"] if isinstance(item, dict) else item
                     if pdf_url in visited_urls:
-                        continue
+                    	continue
                     visited_urls.add(pdf_url)
 
                     status, saved_path, meta = check_and_save_pdf(
@@ -479,8 +469,6 @@ def run_scraper_from_df(
             logger.error("Error processing city '%s' (%s): %s", city if 'city' in locals() else "unknown", country if 'country' in locals() else "unknown", e, exc_info=True)
             continue
 
-
-    # Return dataframes with explicit column order
     results_df = pd.DataFrame(
         results,
         columns=COLUMNS + ["Filename", "Canonical Type", "Extracted Type", "Language", "Year", "Save Date", "PDF URL", "AI_Reasoning", "LLM Response"],

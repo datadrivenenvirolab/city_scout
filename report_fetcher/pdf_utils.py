@@ -254,7 +254,7 @@ def check_and_save_pdf(
             logger.info(
                 "Saved PDF: %s (Type: %s, Year: %s)",
                 confirmed_path,
-                final_report_type_for_filename,
+                safe_report_type,
                 final_year,
             )
             return ("saved", str(confirmed_path), meta)
