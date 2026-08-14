@@ -6,6 +6,7 @@ import logging
 from pathlib import Path
 from pprint import pprint
 from typing import Optional
+from urllib.parse import quote, quote_plus
 
 import pandas as pd
 
@@ -70,17 +71,50 @@ def _save_clean_csv(df: pd.DataFrame, path: Path, keep_cols: list[str] | None = 
     out.to_csv(path, index=False, lineterminator="\n", encoding="utf-8")
 
 
-def setup_logging(verbosity: int) -> None:
+class _RedactingFormatter(logging.Formatter):
+    """Remove configured secrets from fully rendered log records."""
+
+    def __init__(self, fmt: str, secrets: list[str | None]) -> None:
+        super().__init__(fmt)
+        variants: list[str] = []
+        for secret in secrets:
+            if not secret:
+                continue
+            variants.extend((secret, quote(secret, safe=""), quote_plus(secret)))
+        # Longest first avoids a shorter encoded variant masking part of another.
+        self._secrets = tuple(sorted(set(variants), key=len, reverse=True))
+
+    def format(self, record: logging.LogRecord) -> str:
+        rendered = super().format(record)
+        for secret in self._secrets:
+            rendered = rendered.replace(secret, "[REDACTED]")
+        return rendered
+
+
+def setup_logging(verbosity: int, extra_secrets: list[str | None] | None = None) -> None:
     level = logging.WARNING
     if verbosity == 1:
         level = logging.INFO
     elif verbosity >= 2:
         level = logging.DEBUG
+    log_format = (
+        "%(asctime)s %(levelname)s %(pathname)s, line %(lineno)d, "
+        "in %(funcName)s: %(message)s"
+    )
     logging.basicConfig(
         level=level,
-        # format="%(asctime)s %(levelname)s %(name)s %(funcName)s %(lineno)d: %(message)s",
-        format="%(asctime)s %(levelname)s %(pathname)s, line %(lineno)d, in %(funcName)s: %(message)s",
+        format=log_format,
     )
+    formatter = _RedactingFormatter(
+        log_format,
+        secrets=[
+            OPENAI_API_KEY,
+            SCALESERP_API_KEY,
+            *(extra_secrets or []),
+        ],
+    )
+    for handler in logging.getLogger().handlers:
+        handler.setFormatter(formatter)
 
 
 # raise
@@ -141,12 +175,12 @@ def main() -> None:
         "-v",
         "--verbose",
         action="count",
-        default=1,
+        default=0,
         help="Increase verbosity (use -v for INFO, -vv for DEBUG).",
     )
     args = parser.parse_args()
 
-    setup_logging(args.verbose)
+    setup_logging(args.verbose, [args.openai_api_key, args.scaleserp_api_key])
 
     # Load data
     df = load_input(args.input_csv)

@@ -1,21 +1,38 @@
 llm_config:
-  # The identifier of the LLM model to use for classification (e.g., GPT-4o, GPT-3.5-turbo).
-  model: "gpt-5-mini"
+  # The identifier of the LLM model to use for classification.
+  # gpt-5-mini is deprecated (API shutdown 2026-12-11); gpt-5.4-mini is
+  # OpenAI's official migration target.
+  model: "gpt-5.4-mini"
 
   # The maximum length of the model's response in tokens (including reasoning tokens).
   max_output_tokens: 4096
 
-  # Specific to some models: controls the amount of 'thinking' or reasoning steps (e.g., "minimal", "medium", "high").
+  # Reasoning effort for the main classification call. GPT-5.4+ vocabulary:
+  # "none", "low", "medium", "high", "xhigh" — the old "minimal" value was
+  # REMOVED in 5.4 and will error if sent.
   reasoning_effort: "high"
   # reasoning_effort: "medium"
-  # reasoning_effort: "minimal"
+
+  # Reasoning effort for the issuer verification gate (runs only on documents
+  # about to be saved, so volume/cost is negligible). "medium" per the gate's
+  # observed verdict inconsistency at lower effort.
+  gate_reasoning_effort: "medium"
 
   # Controls how much detail the model provides in its internal text processing (e.g., "low", "high").
   text_verbosity: "high"
 
 search_settings:
+  # DuckDuckGo fallback for Stage 1 search. Keep false: Google (ScaleSERP)
+  # coverage is materially better for this workload (the 2026-07-16 DDGS run
+  # found 5 reports where ScaleSERP runs found 16-20). Flip to true only as
+  # a stopgap during a ScaleSERP outage.
+  use_ddgs: false
   # Number of results fetched per focused query (3 queries run per city; merged into max_pdf_results slots).
   results_per_query: 5
+  # Never serve SERP results from the local cache: recurring scheduled scans must
+  # see fresh search results or they can never discover newly published reports.
+  # (The cache file has no TTL; safe for one-shot CLI runs, wrong for a service.)
+  use_search_cache: true
   # If true, appends after:<MinYear> to queries when the row's MinYear exceeds the SEARCH_FOR_AFTER floor.
   use_after_year_filter: false
 
@@ -23,9 +40,27 @@ networking:
   # Maximum duration (in seconds) to wait for a PDF to download.
   pdf_download_timeout: 30
   # If true, skip downloading files that already exist in the temp directory.
-  use_download_cache: false
+  use_download_cache: true
   # If false, prevent downloading any new files. Useful for testing pipelines locally.
   allow_new_downloads: true
+
+  # --- Download robustness ---
+  # Per-URL retry rounds (1 initial pass + retries) on transient failures
+  # (connection errors, HTTP 403/429/5xx). CITYSCOUT_PDF_RETRY_ROUNDS overrides.
+  pdf_download_retry_rounds: 3
+  # Waits (seconds) before retry rounds 2 and 3.
+  pdf_retry_backoff_seconds: [5, 20]
+  # Minimum delay (seconds) between requests to the same host, to avoid tripping
+  # CDN per-IP rate limits.
+  fetch_domain_min_delay: 3.5
+  # Max per-host sessions kept alive (LRU) so CDN cookies persist across retries.
+  max_domain_sessions: 200
+  # curl_cffi TLS impersonation profile ("chrome" = latest). Requires the
+  # curl_cffi package; falls back to plain requests if unavailable.
+  curl_impersonate: "chrome"
+  # Require a %PDF- signature in the first 1 KB (true) or also accept a
+  # PDF-claiming Content-Type when bytes lack the signature but aren't HTML (false).
+  strict_pdf_validation: false
 
   # The API endpoint for the LLM service. Defaults to OpenAI if commented out.
   # endpoint: "https://api.openai.com/v1"
@@ -35,3 +70,11 @@ classification_settings:
   # pick_canonical_report_type_with_llm() before falling back to the raw ReportType strict match.
   # Set to false to restore legacy strict-only behavior.
   use_llm_type_matching: true
+  # Issuer verification gate on documents about to be saved:
+  # off | shadow (log would-be rejections, still save; default) | enforce (reject).
+  # CITYSCOUT_ISSUER_GATE_MODE env var takes precedence.
+  issuer_gate_mode: "shadow"
+  # Reports whose extracted year is older than (current year - N) are rejected
+  # as too_old. Self-updating: the cutoff year is recomputed from the clock at
+  # startup. CITYSCOUT_MAX_REPORT_AGE_YEARS (env) takes precedence.
+  max_report_age_years: 3

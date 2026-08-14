@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 from .config import (
     ACCEPTABLE_REPORT_TYPES,
     BAD_KEYWORDS,
+    BLOCKED_DOC_DOMAINS,
     GOOD_KEYWORDS,
     MIN_ACCEPTABLE_REPORT_YEAR,
     YEAR_REGEX,
@@ -22,6 +23,41 @@ _SUFFIX_RE = re.compile(
     r"\b(inc|llc|ltd|gmbh|sa|nv|ag|pl|plc|spa|pte|s\.a\.|s\.p\.a\.)\.?\b",
     re.I,
 )
+
+
+# Academic TLD patterns: host ends in .edu, .edu.xx, or .ac.xx (edu.pk,
+# ac.uk, ac.jp, ...). University campus plans and papers hosted there are
+# never the city government's own reports.
+_ACADEMIC_HOST_RE = re.compile(r"(^|\.)(edu|ac)(\.[a-z]{2,3})?$", re.I)
+
+
+def is_blocked_doc_domain(url: str) -> bool:
+    """True when the URL's host is an academic or known financial-document
+    domain (see config.BLOCKED_DOC_DOMAINS) — candidates there are skipped
+    before download, saving the fetch and the classification call."""
+    try:
+        host = (urlparse(url).hostname or "").lower()
+    except Exception:
+        return False
+    if not host:
+        return False
+    if _ACADEMIC_HOST_RE.search(host):
+        return True
+    return any(host == d or host.endswith("." + d) for d in BLOCKED_DOC_DOMAINS)
+
+
+def progress_label(index: int, batch_size: int, offset: int = 0, total: Optional[int] = None) -> str:
+    """Progress marker for scan logs, e.g. "[12/34]".
+
+    index is 1-based within the current batch. offset/total describe the whole
+    scan when the service layer processes multiple batches (offset = entities
+    completed in earlier batches, total = queue size when the scan started);
+    without them the label is batch-local. The denominator is clamped so the
+    numerator can never overtake it if more entities become due mid-scan.
+    """
+    if total is not None and total > 0:
+        return f"[{offset + index}/{max(total, offset + batch_size)}]"
+    return f"[{index}/{batch_size}]"
 
 
 def _type_synonyms() -> Dict[str, list[str]]:

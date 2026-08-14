@@ -1,7 +1,33 @@
-﻿.venv/
-outputs/
+﻿# Local environments and secrets
+.venv/
+venv/
+report_fetcher_env/
 .env
-search_cache.json
+.env.*
 
+# Worker and agent state
+.agents/
+
+# Generated pipeline artifacts
+outputs/
+runs/
+chunks/
+search_cache*.json
+*.log
+
+# Python caches and test output
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+coverage.xml
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/

@@ -19,6 +19,7 @@ from .config import (
     CONFIRMED_PDF_DIR,
     COUNTRY_NAME_COLUMN,
     ENGLISH_SPEAKING_COUNTRIES,
+    FALLBACK_ENABLED,
     MAX_PAGE_RESULTS,
     MAX_PAGES_TOTAL,
     MAX_PDF_RESULTS,
@@ -33,8 +34,10 @@ from .config import (
 )
 from .fetch import scrape_report_page_for_pdfs
 from .pdf_utils import check_and_save_pdf
-from .search import process_companies_for_fallback_reports
-from .utils import select_top_links
+from .search_focused import (
+    process_companies_for_fallback_reports_focused as process_companies_for_fallback_reports,
+)
+from .utils import is_blocked_doc_domain, progress_label, select_top_links
 
 logger = logging.getLogger(__name__)
 
@@ -100,17 +103,19 @@ class _RobustCompletionWrapper:
                 if ":" in pair:
                     k, v = pair.split(":", 1)
                     parsed[k.strip()] = v.strip()
-            
+
             mapping = {
                 "Relevance": "relevance",
                 "CorrectCity": "correct_city",
                 "ReportType": "canonical_type",
                 "LLMType": "llm_type",
                 "Year": "final_year",
+                "YearStart": "year_start",
+                "PublicationDate": "publish_date",
                 "Language": "language",
                 "Reasoning": "ai_reasoning"
             }
-            
+
             structured = {}
             for k, v in parsed.items():
                 target_key = mapping.get(k, k.lower())
@@ -119,7 +124,7 @@ class _RobustCompletionWrapper:
                     structured["ai_report_type"] = v
                 if target_key == "final_year":
                     structured["ai_year_raw"] = v
-            
+
             structured["llm_response"] = content
             res.choices[0].message.content = json.dumps(structured)
         return res
@@ -132,6 +137,8 @@ def stage2_main(
     scaleserp_api_key: Optional[str] = None,
     include_fallback_for_non_english_when_primary_is_english: bool = True,
     show_progress: bool = True,
+    progress_offset: int = 0,
+    progress_total: Optional[int] = None,
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     try:
         from openai import OpenAI
@@ -140,7 +147,7 @@ def stage2_main(
         client.chat.completions.create = _RobustCompletionWrapper(client.chat.completions.create).create
     except Exception as e:
         logger.error("OpenAI client initialization failed: %s", e, exc_info=True)
-        empty_cols = COLUMNS + ["Filename", "Canonical Type", "Language", "Year", "Save Date"]
+        empty_cols = COLUMNS + ["Filename", "Saved Folder", "Quarantined", "Canonical Type", "Language", "Year", "Year Start", "Year End", "Publication Date", "Year Source", "Metadata Created", "Metadata Modified", "Save Date"]
         return (
             pd.DataFrame(columns=empty_cols),
             pd.DataFrame([{"Reason": f"OpenAI configuration error: {e}"}]),
@@ -155,6 +162,8 @@ def stage2_main(
         df_with_links,
         client=client,
         show_progress=show_progress,
+        progress_offset=progress_offset,
+        progress_total=progress_total,
     )
 
     all_companies_df = df_with_links[COLUMNS].drop_duplicates()
@@ -165,7 +174,14 @@ def stage2_main(
         ~all_companies_df[CITY_NAME_COLUMN].isin(saved_companies)
     ]
 
-    if not companies_without_pdfs.empty:
+    if not FALLBACK_ENABLED and not companies_without_pdfs.empty:
+        logger.info(
+            "Stage 2: Fallback disabled (CITYSCOUT_ENABLE_FALLBACK=off); "
+            "skipping language fallback for %d companies.",
+            len(companies_without_pdfs),
+        )
+
+    if FALLBACK_ENABLED and not companies_without_pdfs.empty:
         logger.info(
             "Stage 2: Fallback — no PDFs for %d companies; running language fallback search.",
             len(companies_without_pdfs),
@@ -187,7 +203,6 @@ def stage2_main(
             if not fallback_api_key:
                 logger.warning("No ScaleSERP API key for fallback; skipping fallback stage.")
             else:
-                process_companies_for_fallback_reports
                 fallback_links_df = process_companies_for_fallback_reports(
                     fallback_df,
                     scaleserp_api_key=fallback_api_key,
@@ -220,8 +235,10 @@ def run_scraper_from_df(
     *,
     client,
     show_progress: bool = True,
+    progress_offset: int = 0,
+    progress_total: Optional[int] = None,
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    target_cols = COLUMNS + ["Filename", "Canonical Type", "Extracted Type", "Language", "Year", "Save Date", "PDF URL", "AI_Reasoning", "LLM Response"]
+    target_cols = COLUMNS + ["Filename", "Saved Folder", "Quarantined", "Canonical Type", "Extracted Type", "Language", "Year", "Year Start", "Year End", "Publication Date", "Year Source", "Metadata Created", "Metadata Modified", "Save Date", "PDF URL", "Source Page URL", "AI_Reasoning", "LLM Response"]
 
     if dataframe is None or dataframe.empty:
         return (
@@ -256,14 +273,21 @@ def run_scraper_from_df(
         desc="Stage 2: classify & download",
     )
 
-    for row_dict in iterator:
+    for row_index, row_dict in enumerate(iterator, start=1):
         try:
             city = (str(row_dict.get(CITY_NAME_COLUMN, "")) or "").strip()
             region = (str(row_dict.get(REGION_NAME_COLUMN, "")) or "").strip()
             country = (str(row_dict.get(COUNTRY_NAME_COLUMN, "")) or "").strip()
             subregion = (str(row_dict.get(SUBREGION_NAME_COLUMN, "")) or "").strip()
 
-            logger.info("Processing city: %s, %s, %s (%s)", city, subregion, region, country)
+            logger.info(
+                "Stage 2 classify %s: %s, %s, %s (%s)",
+                progress_label(row_index, len(rows), progress_offset, progress_total),
+                city,
+                subregion,
+                region,
+                country,
+            )
 
             pdf_links = [row_dict.get(f"pdf_link{i}") for i in range(1, MAX_PDF_RESULTS + 1)]
             page_links = [row_dict.get(f"page_link{i}") for i in range(1, MAX_PAGE_RESULTS + 1)]
@@ -278,6 +302,15 @@ def run_scraper_from_df(
                     continue
                 visited_urls.add(link)
 
+                if is_blocked_doc_domain(link):
+                    logger.info("Skipping blocked domain (academic/financial host): %s", link)
+                    failed_download_rows.append(
+                        {"City": city, "Country": country, "Failed_Link": link,
+                         "Reason": "Blocked domain (academic/financial host)",
+                         "AI_Reasoning": "", "LLM Response": ""}
+                    )
+                    continue
+
                 status, saved_path, meta = check_and_save_pdf(
                     link,
                     city,
@@ -290,6 +323,22 @@ def run_scraper_from_df(
 
                 if status == "saved" and saved_path:
                     found_files.append(saved_path)
+                    if meta.get("gate_verdict") == "reject":
+                        # Shadow mode: saved anyway, but queued for review.
+                        type_mismatch_rows.append(
+                            {
+                                "City": city,
+                                "Country": country,
+                                "PDF_Link": meta.get("url") or link,
+                                "Kind": "issuer_gate_shadow",
+                                "Reason": (
+                                    f"[shadow] issuer gate would reject: "
+                                    f"class={meta.get('gate_doc_class')}, issuer={meta.get('gate_issuer')}"
+                                ),
+                                "AI_Reasoning": meta.get("gate_reason") or "",
+                                "LLM Response": meta.get("llm_response") or "",
+                            }
+                        )
                     results.append(
                         {
                             CITY_NAME_COLUMN: city,
@@ -297,23 +346,37 @@ def run_scraper_from_df(
                             SUBREGION_NAME_COLUMN: subregion,
                             COUNTRY_NAME_COLUMN: country,
                             "Filename": os.path.basename(saved_path),
+                            "Saved Folder": meta.get("saved_dir") or "",
+                            "Quarantined": bool(meta.get("gate_quarantined")),
                             "Canonical Type": meta.get("canonical_type") or "",
                             "Extracted Type": meta.get("ai_report_type") or "",
                             "Language": (meta.get("language") or "unknown"),
                             "Year": meta.get("final_year") or "",
+                            "Year Start": meta.get("year_start") or "",
+                            "Year End": meta.get("year_end") or "",
+                            "Publication Date": meta.get("publish_date") or "",
+                            "Year Source": meta.get("year_source") or "",
+                            "Metadata Created": meta.get("metadata_created_date") or "",
+                            "Metadata Modified": meta.get("metadata_modified_date") or "",
                             "Save Date": meta.get("save_date") or _dt.date.today().isoformat(),
                             "PDF URL": meta.get("url") or "",
+                            "Source Page URL": meta.get("source_page_url") or "",
                             "AI_Reasoning": meta.get("ai_reasoning") or "",
                             "LLM Response": meta.get("llm_response") or "",
                         }
                     )
                 elif status == "download_failed":
+                    dl_err = meta.get("download_error") or ""
                     failed_download_rows.append(
                         {
                             "City": city,
                             "Country": country,
                             "Failed_Link": link,
-                            "Reason": "Initial PDF download failed",
+                            "Reason": (
+                                f"Initial PDF download failed: {dl_err}"
+                                if dl_err
+                                else "Initial PDF download failed"
+                            ),
                             "AI_Reasoning": meta.get("ai_reasoning") or "",
                             "LLM Response": meta.get("llm_response") or "",
                         }
@@ -330,6 +393,21 @@ def run_scraper_from_df(
                             "Final_Year_Used": meta.get("final_year"),
                             "Reason": "Relevant by AI, but type not in ACCEPTABLE_REPORT_TYPES",
                             "AI_Reasoning": meta.get("ai_reasoning") or "",
+                            "LLM Response": meta.get("llm_response") or "",
+                        }
+                    )
+                elif status == "issuer_rejected":
+                    type_mismatch_rows.append(
+                        {
+                            "City": city,
+                            "Country": country,
+                            "PDF_Link": link,
+                            "Kind": "issuer_rejected",
+                            "Reason": (
+                                f"Rejected by issuer gate: "
+                                f"class={meta.get('gate_doc_class')}, issuer={meta.get('gate_issuer')}"
+                            ),
+                            "AI_Reasoning": meta.get("gate_reason") or "",
                             "LLM Response": meta.get("llm_response") or "",
                         }
                     )
@@ -369,6 +447,10 @@ def run_scraper_from_df(
                 ]
 
                 scraped_pdf_links: List[str] = []
+                # Remember which landing page each PDF link was scraped from so the
+                # downloader can replay a browse-then-click chain and fall back to
+                # re-scanning that page if the direct link fails.
+                pdf_source_page: Dict[str, str] = {}
                 for official_url in official_pages:
                     if official_url in visited_urls:
                         continue
@@ -378,6 +460,8 @@ def run_scraper_from_df(
                         country=country,
                         visited=visited_urls,
                     )
+                    for scraped_link in scraped:
+                        pdf_source_page.setdefault(scraped_link, official_url)
                     scraped_pdf_links.extend(scraped)
 
                 scraped_pdf_links = [u for u in scraped_pdf_links if u not in visited_urls]
@@ -393,8 +477,17 @@ def run_scraper_from_df(
                 for item in selected_candidates:
                     pdf_url = item["url"] if isinstance(item, dict) else item
                     if pdf_url in visited_urls:
-                    	continue
+                        continue
                     visited_urls.add(pdf_url)
+
+                    if is_blocked_doc_domain(pdf_url):
+                        logger.info("Skipping blocked domain (academic/financial host): %s", pdf_url)
+                        failed_download_rows.append(
+                            {"City": city, "Country": country, "Failed_Link": pdf_url,
+                             "Reason": "Blocked domain (academic/financial host)",
+                             "AI_Reasoning": "", "LLM Response": ""}
+                        )
+                        continue
 
                     status, saved_path, meta = check_and_save_pdf(
                         pdf_url,
@@ -404,32 +497,63 @@ def run_scraper_from_df(
                         temp_dir=TEMP_PDF_DIR,
                         confirmed_dir=CONFIRMED_PDF_DIR,
                         min_year=MIN_ACCEPTABLE_REPORT_YEAR,
+                        page_url=pdf_source_page.get(pdf_url),
                     )
 
                     if status == "saved" and saved_path:
                         found_files.append(saved_path)
+                        if meta.get("gate_verdict") == "reject":
+                            # Shadow mode: saved anyway, but queued for review.
+                            type_mismatch_rows.append(
+                                {
+                                    "City": city,
+                                    "Country": country,
+                                    "PDF_Link": meta.get("url") or pdf_url,
+                                    "Kind": "issuer_gate_shadow",
+                                    "Reason": (
+                                        f"[shadow] issuer gate would reject: "
+                                        f"class={meta.get('gate_doc_class')}, issuer={meta.get('gate_issuer')}"
+                                    ),
+                                    "AI_Reasoning": meta.get("gate_reason") or "",
+                                    "LLM Response": meta.get("llm_response") or "",
+                                }
+                            )
                         results.append(
                             {
                                 CITY_NAME_COLUMN: city,
                                 COUNTRY_NAME_COLUMN: country,
                                 "Filename": os.path.basename(saved_path),
+                                "Saved Folder": meta.get("saved_dir") or "",
+                                "Quarantined": bool(meta.get("gate_quarantined")),
                                 "Canonical Type": meta.get("canonical_type") or "",
                                 "Extracted Type": meta.get("ai_report_type") or "",
                                 "Language": (meta.get("language") or "unknown"),
                                 "Year": meta.get("final_year") or "",
+                                "Year Start": meta.get("year_start") or "",
+                                "Year End": meta.get("year_end") or "",
+                                "Publication Date": meta.get("publish_date") or "",
+                                "Year Source": meta.get("year_source") or "",
+                                "Metadata Created": meta.get("metadata_created_date") or "",
+                                "Metadata Modified": meta.get("metadata_modified_date") or "",
                                 "Save Date": meta.get("save_date") or _dt.date.today().isoformat(),
                                 "PDF URL": meta.get("url") or "",
+                                "Source Page URL": meta.get("source_page_url") or "",
                                 "AI_Reasoning": meta.get("ai_reasoning") or "",
                                 "LLM Response": meta.get("llm_response") or "",
                             }
                         )
                     elif status == "download_failed":
+                        dl_err = meta.get("download_error") or ""
                         failed_download_rows.append(
                             {
                                 "City": city,
                                 "Country": country,
                                 "Failed_Link": pdf_url,
-                                "Reason": "Scraped PDF download failed",
+                                "Reason": (
+                                    f"Scraped PDF download failed: {dl_err}"
+                                    if dl_err
+                                    else "Scraped PDF download failed"
+                                ),
                                 "AI_Reasoning": meta.get("ai_reasoning") or "",
                                 "LLM Response": meta.get("llm_response") or "",
                             }
@@ -446,6 +570,21 @@ def run_scraper_from_df(
                                 "Final_Year_Used": meta.get("final_year"),
                                 "Reason": "Relevant by AI, but type not in ACCEPTABLE_REPORT_TYPES",
                                 "AI_Reasoning": meta.get("ai_reasoning") or "",
+                                "LLM Response": meta.get("llm_response") or "",
+                            }
+                        )
+                    elif status == "issuer_rejected":
+                        type_mismatch_rows.append(
+                            {
+                                "City": city,
+                                "Country": country,
+                                "PDF_Link": pdf_url,
+                                "Kind": "issuer_rejected",
+                                "Reason": (
+                                    f"Rejected by issuer gate: "
+                                    f"class={meta.get('gate_doc_class')}, issuer={meta.get('gate_issuer')}"
+                                ),
+                                "AI_Reasoning": meta.get("gate_reason") or "",
                                 "LLM Response": meta.get("llm_response") or "",
                             }
                         )
@@ -471,7 +610,7 @@ def run_scraper_from_df(
 
     results_df = pd.DataFrame(
         results,
-        columns=COLUMNS + ["Filename", "Canonical Type", "Extracted Type", "Language", "Year", "Save Date", "PDF URL", "AI_Reasoning", "LLM Response"],
+        columns=COLUMNS + ["Filename", "Saved Folder", "Quarantined", "Canonical Type", "Extracted Type", "Language", "Year", "Year Start", "Year End", "Publication Date", "Year Source", "Metadata Created", "Metadata Modified", "Save Date", "PDF URL", "Source Page URL", "AI_Reasoning", "LLM Response"],
     )
     failed_df = pd.DataFrame(failed_download_rows)
     mismatch_df = pd.DataFrame(type_mismatch_rows)

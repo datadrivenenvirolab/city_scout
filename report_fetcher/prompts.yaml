@@ -2,7 +2,7 @@ classification_prompt: |
   You are a strict report-classifier.
 
   TASK
-  From the excerpt below, output seven fields:
+  From the excerpt below, output nine fields:
 
   1. ReportType – determine the original report type from the title page.
      • If not in English, translate to English
@@ -18,7 +18,20 @@ classification_prompt: |
   3. Year – the most recent 4-digit year describing the report period or title.
      • If multiple (e.g., 2023–2024) take the later year. If none, write “unknown”.
 
-  4. Relevance – “Yes” only if ALL are true:
+  4. YearStart – if the report period or title spans a range of years
+     (e.g., 2015–2030 or 2023–2024), the earlier 4-digit year of that range.
+     • If the report has a single year, or no year at all, write “none”.
+
+  5. PublicationDate – the date the document itself was published, issued, adopted,
+     or approved, as stated IN the document (cover date, imprint/colophon, copyright
+     line, “Published …” / “Adopted on …” / “Approved …” statements, version history).
+     • Output as much precision as the document gives: YYYY-MM-DD, YYYY-MM, or YYYY.
+     • Do NOT use the report period, target year, or a year range from the title
+       (e.g., “Plan 2015–2030”) as the publication date — those describe what the
+       report covers, not when it was published.
+     • If no explicit publication/issue date is stated, write “unknown”. Never guess.
+
+  6. Relevance – “Yes” only if ALL are true:
      • Contains information about climate, environmental or energy commitments, pledges, targets, actions.
      • Is a full document (NOT an announcement, summary, press release, media article, or promotional brochure about a report)
        • If the document only announces that a report has been published
@@ -26,23 +39,70 @@ classification_prompt: |
          Relevance: No and ReportType: Press release.
      • Not a multi-region overview; focuses on the target region.
      • Not purely financial-only.
+     • Not a financial-instrument document: green/sustainability bond frameworks, Second Party
+       Opinions (SPOs), investor-relations or bond-issuance presentations, and credit or ESG
+       rating assessments are NOT acceptable, even when they discuss climate projects.
      • Must include some information about climate mitigation, energy or climate adaptation actions or targets, not only about air pollution or water.
      • Must be produced by a government body, public agency, municipal/national/regional authority, or a professional consultancy or research firm. Academic works (master's theses, dissertations, student assignments, university course projects, or academic research papers submitted as partial fulfilment of a degree) are NOT acceptable.
+     • Institutional affiliation, an academic/professional title, a logo, letterhead, or hosting on an institution's website is not sufficient evidence that the institution produced the document. Individually authored essays, opinion pieces, lectures, and speculative or conceptual proposals are NOT acceptable unless the document clearly states that an eligible organization formally issued, commissioned, adopted, or endorsed it as an institutional report.
 
-  5. CorrectCity – "Yes" only if '{city_name}' in {province} of '{country}' is a primary subject of the document.
+  7. CorrectCity – "Yes" only if '{city_name}' in {province} of '{country}' is a primary subject of the document.
      • "Yes" if the document focuses solely on the target city.
      • "Yes" if the document is a joint or collaborative report where the target city is one of 2–3 equal co-authors or co-subjects (e.g. "Climate Plan for Eindhoven and Helmond").
      • "No" if the document is a regional, national, or multi-city overview where the target city is one of many.
      • "No" if the target city is mentioned only in passing or as a comparison.
      • "No" if the document focuses on private entities (e.g. companies, universities) rather than the city government.
 
-  6. Language – the primary language of the document as a 2-letter ISO 639-1 code (e.g., “en”, “ja”, “zh”, “ru”, “de”, “fr”).
+  8. Language – the primary language of the document as a 2-letter ISO 639-1 code (e.g., “en”, “ja”, “zh”, “ru”, “de”, “fr”).
 
-  7. Reasoning – a brief explanation of why the document was accepted or rejected based on the criteria above.
+  9. Reasoning – a brief explanation of why the document was accepted or rejected based on the
+     criteria above. Always name the organization that issued/published the document.
 
   # SYNC: OUTPUT FORMAT must match the format string in classify.py is_relevant_pdf()
   OUTPUT FORMAT (one line, no extra words):
-  Relevance: <Yes/No>, CorrectCity: <Yes/No>, ReportType: <Type>, LLMType: <CanonicalType>, Year: <Year>, Language: <Language>, Reasoning: <Brief explanation>
+  Relevance: <Yes/No>, CorrectCity: <Yes/No>, ReportType: <Type>, LLMType: <CanonicalType>, Year: <Year>, YearStart: <YearStart>, PublicationDate: <PublicationDate>, Language: <Language>, Reasoning: <Brief explanation>
+
+  Document text:
+  {excerpt}
+
+issuer_gate_prompt: |
+  You are verifying a document that has already been classified as a relevant
+  climate/environment report about '{city_name}' in '{country}'. Your ONLY job
+  is to identify who issued this document and what class of document it is.
+
+  From the excerpt, determine:
+
+  1. Issuer – the organization that issued/published/adopted THIS document.
+     Read the title page, letterhead, imprint/colophon, copyright line, and
+     document-number boilerplate. Name the organization exactly as stated.
+
+  2. DocClass – exactly one of:
+     • government_report – issued, adopted, or commissioned by the government,
+       administration, or a public authority of '{city_name}' itself. This
+       includes consultancies writing on the government's behalf, and
+       collaborations (e.g. C40, EU city programmes) where the government of
+       '{city_name}' is the plan's owner or co-author.
+     • financial_document – green/sustainability bond framework, Second Party
+       Opinion (SPO), investor-relations or bond-issuance presentation,
+       credit/ESG rating assessment, or budget document — regardless of who
+       issued it or how much climate content it quotes.
+     • research_publication – a study, case study, evaluation, or academic
+       paper ABOUT the place, issued by a research body, university,
+       international/EU research institution, or think tank — not by the
+       government of '{city_name}'.
+     • other_org_document – another organization's own plan or report for its
+       campus, premises, or operations (university, company, hospital, port),
+       even if that organization is located in '{city_name}' and the city's
+       name appears in the title.
+     • unknown – the excerpt gives no usable issuer signal.
+
+  3. Verdict – "Pass" only if DocClass is government_report. "Reject" for
+     financial_document, research_publication, or other_org_document.
+     "Pass" for unknown (give the document the benefit of the doubt).
+
+  # SYNC: OUTPUT FORMAT must match the parser in classify.py verify_issuer()
+  OUTPUT FORMAT (one line, no extra words):
+  Verdict: <Pass/Reject>, DocClass: <class>, Issuer: <organization name>, Reason: <brief explanation>
 
   Document text:
   {excerpt}

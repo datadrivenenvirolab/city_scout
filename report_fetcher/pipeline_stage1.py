@@ -36,9 +36,14 @@ def stage1_main(
     *,
     include_country_in_search: bool = True,
     show_progress: bool = True,
+    progress_offset: int = 0,
+    progress_total: Optional[int] = None,
 ) -> pd.DataFrame:
     """
     Stage 1: run primary search and return a *clean* DataFrame of links.
+
+    progress_offset/progress_total: scan-wide progress context (see
+    utils.progress_label); forwarded into the per-entity search loop.
     """
     logger.info("--- Stage 1: Finding Report Links (Primary Search) ---")
 
@@ -47,6 +52,8 @@ def stage1_main(
         api_key=scaleserp_api_key,
         include_country_in_search=include_country_in_search,
         show_progress=show_progress,
+        progress_offset=progress_offset,
+        progress_total=progress_total,
     )
 
 

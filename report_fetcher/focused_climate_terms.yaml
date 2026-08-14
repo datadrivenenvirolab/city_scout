@@ -30,3 +30,63 @@ focused_terms:
     q1: '"ゼロエミッション東京戦略" OR "気候変動対策" OR "気候変動対策計画" OR "環境基本計画"'
     q2: '"CO2排出実質ゼロ" OR "実質ゼロ" OR "カーボンハーフ" OR "脱炭素"'
     q3: '"気候変動適応計画" OR "気候変動適応" OR "適応策" OR "気候変動適応策"'
+
+  ko:
+    q1: '"기후행동계획" OR "기후변화대응계획" OR "탄소중립 녹색성장 기본계획" OR "기후위기 대응"'
+    q2: '"탄소중립" OR "온실가스 감축" OR "넷제로" OR "탄소중립도시"'
+    q3: '"기후변화 적응대책" OR "기후변화 적응" OR "에너지 기본계획" OR "온실가스 감축 로드맵"'
+
+  pl:
+    q1: '"plan adaptacji do zmian klimatu" OR "polityka klimatyczna" OR "plan gospodarki niskoemisyjnej" OR "strategia klimatyczna"'
+    q2: '"neutralność klimatyczna" OR "neutralność węglowa" OR "zeroemisyjność" OR "zero netto"'
+    q3: '"adaptacja do zmian klimatu" OR "plan działań na rzecz klimatu" OR "ograniczenie emisji" OR "plan działań na rzecz zrównoważonej energii"'
+
+  pt:
+    q1: '"plano de ação climática" OR "plano municipal de mudanças climáticas" OR "plano clima" OR "estratégia climática"'
+    q2: '"neutralidade carbónica" OR "neutralidade de carbono" OR "emissões líquidas zero" OR "carbono neutro"'
+    q3: '"adaptação às mudanças climáticas" OR "inventário de emissões" OR "mitigação das mudanças climáticas" OR "plano de energia sustentável"'
+
+  it:
+    q1: '"piano di azione per il clima" OR "piano clima" OR "strategia climatica" OR "programma energia ambiente e clima"'
+    q2: '"neutralità climatica" OR "neutralità carbonica" OR "zero emissioni nette" OR "carbon neutral"'
+    q3: '"adattamento ai cambiamenti climatici" OR "strategia di adattamento" OR "mitigazione dei cambiamenti climatici" OR "piano d''azione per l''energia sostenibile"'
+
+  tr:
+    q1: '"iklim eylem planı" OR "iklim değişikliği eylem planı" OR "iklim stratejisi" OR "sürdürülebilir enerji eylem planı"'
+    q2: '"karbon nötr" OR "net sıfır emisyon" OR "iklim nötr" OR "sıfır karbon"'
+    q3: '"iklim değişikliğine uyum" OR "uyum eylem planı" OR "sera gazı envanteri" OR "iklim değişikliği azaltım"'
+
+  th:
+    q1: '"แผนปฏิบัติการด้านการเปลี่ยนแปลงสภาพภูมิอากาศ" OR "แผนการดำเนินงานด้านสภาพภูมิอากาศ" OR "ยุทธศาสตร์การเปลี่ยนแปลงสภาพภูมิอากาศ"'
+    q2: '"ความเป็นกลางทางคาร์บอน" OR "การปล่อยก๊าซเรือนกระจกสุทธิเป็นศูนย์" OR "คาร์บอนต่ำ"'
+    q3: '"การปรับตัวต่อการเปลี่ยนแปลงสภาพภูมิอากาศ" OR "แผนการปรับตัว" OR "การลดก๊าซเรือนกระจก"'
+
+  id:
+    q1: '"rencana aksi daerah perubahan iklim" OR "rencana aksi iklim" OR "strategi perubahan iklim" OR "kebijakan perubahan iklim"'
+    q2: '"netral karbon" OR "nol emisi bersih" OR "emisi nol bersih" OR "rendah karbon"'
+    q3: '"adaptasi perubahan iklim" OR "rencana adaptasi" OR "inventarisasi gas rumah kaca" OR "mitigasi perubahan iklim"'
+
+  vi:
+    q1: '"kế hoạch hành động ứng phó với biến đổi khí hậu" OR "kế hoạch hành động khí hậu" OR "chiến lược biến đổi khí hậu"'
+    q2: '"trung hòa carbon" OR "phát thải ròng bằng 0" OR "net zero" OR "carbon thấp"'
+    q3: '"thích ứng với biến đổi khí hậu" OR "kế hoạch thích ứng" OR "giảm nhẹ phát thải khí nhà kính"'
+
+  nl:
+    q1: '"klimaatplan" OR "klimaatactieplan" OR "klimaatadaptatiestrategie" OR "duurzaamheidsstrategie"'
+    q2: '"klimaatneutraal" OR "CO2-neutraal" OR "netto nul" OR "energieneutraal"'
+    q3: '"klimaatadaptatie" OR "aanpassing aan klimaatverandering" OR "duurzaam energie actieplan" OR "uitstoot verminderen"'
+
+  uk:
+    q1: '"кліматичний план" OR "план кліматичних дій" OR "кліматична стратегія" OR "план дій сталого енергетичного розвитку"'
+    q2: '"вуглецева нейтральність" OR "кліматична нейтральність" OR "нульові чисті викиди" OR "низьковуглецевий"'
+    q3: '"адаптація до зміни клімату" OR "план адаптації" OR "скорочення викидів" OR "пом''якшення зміни клімату"'
+
+  ar:
+    q1: '"خطة العمل المناخي" OR "الاستراتيجية المناخية" OR "خطة التغير المناخي" OR "استراتيجية التغير المناخي"'
+    q2: '"الحياد الكربوني" OR "صافي انبعاثات صفري" OR "الحياد المناخي" OR "خفض الانبعاثات"'
+    q3: '"التكيف مع تغير المناخ" OR "خطة التكيف" OR "جرد الغازات الدفيئة" OR "التخفيف من تغير المناخ"'
+
+  fa:
+    q1: '"برنامه اقدام اقلیمی" OR "راهبرد تغییر اقلیم" OR "برنامه سازگاری با تغییر اقلیم"'
+    q2: '"خنثی کربنی" OR "صفر خالص انتشار" OR "کربن کم"'
+    q3: '"سازگاری با تغییر اقلیم" OR "کاهش انتشار گازهای گلخانه‌ای" OR "برنامه انرژی پایدار"'
